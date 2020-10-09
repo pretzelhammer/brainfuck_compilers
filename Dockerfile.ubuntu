@@ -1,0 +1,6 @@
+FROM ubuntu:20.04
+
+RUN apt-get update
+RUN apt-get -y install clang
+RUN apt-get -y install qemu qemu-system
+RUN apt-get -y install gcc-aarch64-linux-gnu

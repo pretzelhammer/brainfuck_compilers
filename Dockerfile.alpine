@@ -1,0 +1,3 @@
+FROM alpine:3.12
+
+RUN apk update && apk upgrade && apk add build-base clang qemu-x86_64 qemu-aarch64
