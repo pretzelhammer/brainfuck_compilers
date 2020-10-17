@@ -1,22 +1,17 @@
-# gnu assembly, x86_64 linux
+# ./examples/x86_64/exit.s
 
-# run program with: just carx exit
+# GNU Assembler, x86_64 Linux
 
-.rodata
+.data
 
-.set SYS_EXIT, 60
-.set EXIT_CODE, 0
+.equ SYS_EXIT, 60
+.equ EXIT_CODE, 0
 
 .text
 
 .global _start
 
 _start:
-    # exit(EXIT_CODE)
-    mov $SYS_EXIT, %rax      # set syscall number
-    mov $EXIT_CODE, %rdi     # set syscall arg
-    syscall
-
-# program should exit with EXIT_CODE
-# trying editing EXIT_CODE and re-running to see changes
-# run program with: just carx exit
+    mov $SYS_EXIT, %rax         # set syscall number
+    mov $EXIT_CODE, %rdi        # set syscall argument
+    syscall                     # make syscall

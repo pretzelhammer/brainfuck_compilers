@@ -45,6 +45,7 @@
 .text
 
 _start:
+    // "adr <reg>, <label>" on aarch64 works same as "lea <reg>, [rip + <label>]" on x86_64
     adr x19, MEM
     // add [x19], #1 // pretty sure this can't work, must use load & store instructions
 

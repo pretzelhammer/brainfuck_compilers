@@ -154,7 +154,9 @@ lend_1:
     mov %r8, %rsi
     mov $1, %rdx
     syscall                  # overwrites %rax
+                             # can trample %rdi %rsi %rdx -_-
     mov $SYS_WRITE, %rax
+    # need to set %rdi %rsi %rdx again
     syscall
 
     # >

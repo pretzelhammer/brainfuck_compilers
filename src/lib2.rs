@@ -20,20 +20,19 @@ const INSTRUCTIONS: &[char; 8] = &[
     LOOP_END,
 ];
 
-pub const ARRAY_LEN: usize = 30_000;
-pub const NEWLINE: u8 = 0;
+pub const MEM_LIMIT: usize = 30_000;
 pub const EOF: u8 = 0;
 
 #[derive(Debug, Eq, PartialEq)]
 pub enum Inst {
-    IncPtr(usize),
-    DecPtr(usize),
-    IncByte(usize),
-    DecByte(usize),
-    WriteByte(usize),
-    ReadByte(usize),
-    LoopStart(usize, usize),
-    LoopEnd(usize, usize),
+    IncPtr,
+    DecPtr,
+    IncByte,
+    DecByte,
+    WriteByte,
+    ReadByte,
+    LoopStart(usize),
+    LoopEnd(usize),
 }
 
 fn map_char_to_inst(c: char, loop_depth: usize) -> Inst {

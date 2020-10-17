@@ -178,8 +178,9 @@ lend_1:
     mov x0, #STDOUT
     mov x1, x19
     mov x2, #1
-    svc #0               // overwrites x0
+    svc #0               // overwrites x0 // also can overwrite x1, x2, x8 ?
     mov x0, #STDOUT
+    // need to reset x0, x1, x2, x8 here
     svc #0
 
     // >

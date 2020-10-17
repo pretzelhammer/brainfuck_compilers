@@ -3,27 +3,34 @@ ubuntu-sh:
     docker run -v $(pwd):/root/project -w /root/project -it pretzelhammer/ubuntu-clang-qemu bash
 
 build-ubuntu:
-    docker build -f Dockerfile.ubuntu -t pretzelhammer/ubuntu-clang-qemu .
+    docker build -f Dockerfile -t pretzelhammer/ubuntu-clang-qemu .
+
+
 
 alias cara := compile-and-run-aarch64-example
 
+
+# formerly clang -nostdlib -fno-integrated-as
 compile-and-run-aarch64-example name:
-    docker run -it -v $(pwd):/root/project -w /root/project/examples/aarch64 pretzelhammer/ubuntu-clang-qemu bash -c "clang -nostdlib -fno-integrated-as -target aarch64-linux-gnu -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo \"Exit code: \$?\""
+    docker run -it -v $(pwd):/root/project -w /root/project/examples/aarch64 pretzelhammer/ubuntu-clang-qemu bash -c "clang -nostdlib -fno-integrated-as -target aarch64-linux-gnu -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
 alias carx := compile-and-run-x86_64-example
 
+
+# formerly clang -nostdlib -fno-integrated-as
+# formerly clang -nostdlib -masm=intel
 compile-and-run-x86_64-example name:
-    docker run -it -v $(pwd):/root/project -w /root/project/examples/x86_64 pretzelhammer/ubuntu-clang-qemu bash -c "clang -nostdlib -fno-integrated-as -target x86_64-linux-gnu -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo \"Exit code: \$?\""
+    docker run -it -v $(pwd):/root/project -w /root/project/examples/x86_64 pretzelhammer/ubuntu-clang-qemu bash -c "clang -nostdlib -fno-integrated-as -Wa,-msyntax=intel,-mnaked-reg -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
-alias carw := compile-and-run-wasm64-example
+alias carw := compile-and-run-wasm32-wasi-example
 
-compile-and-run-wasm64-example name:
-    echo "todo"
+compile-and-run-wasm32-wasi-example name:
+    wasmtime ./examples/wasm32-wasi/{{name}}.wat; echo "\nExit code: $?";
 
-alias carl := compile-and-run-llvm-example
+alias carl := compile-and-run-llvm-ir-example
 
-compile-and-run-llvm-example name:
-    echo "todo"
+compile-and-run-llvm-ir-example name:
+    docker run -it -v $(pwd):/root/project -w /root/project/examples/llvm-ir pretzelhammer/ubuntu-clang-qemu bash -c "clang -Wno-override-module {{name}}.ll -o {{name}}.out && ./{{name}}.out; echo \"Exit code: \$?\""
 
 
 
@@ -61,9 +68,3 @@ assemble_linux_hw:
 
 link_linux_hw:
     ld -o x86_64_linux_hello_world x86_64_linux_hello_world.o
-
-into-linux:
-    docker run -v $(pwd):/root/project -w /root/project -it silkeh/clang:latest bash
-
-compile-linux-hello:
-    docker run -v $(pwd):/root/project -w /root/project -it silkeh/clang:latest bash -c "clang -s linux_64_gas_hello.s -o linux_64_gas_hello && ./linux_64_gas_hello"
