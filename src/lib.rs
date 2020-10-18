@@ -168,7 +168,7 @@ pub fn parse(src: &str) -> Result<Vec<Inst>, Error> {
                     }
                 }
             },
-            Inst::LoopEnd(n, _) => {
+            Inst::LoopEnd(_, _) => {
                 let mut mut_n = 0; //*n;
                 for j in (0..i).rev() {
                     let prev_inst = &instructions[j];

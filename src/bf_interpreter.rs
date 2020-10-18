@@ -49,6 +49,11 @@ fn run<R: Read, W: Write>(instructions: &[Inst], mut input: Bytes<R>, output: &m
                 inst_ptr += 1;
             },
             Inst::ReadByte(n) => {
+                // before asking user for some input we have to make
+                // sure they've seen our prompt / output
+                if let Err(error) = output.flush() {
+                    panic!("error while flushing to output: {}", error);
+                }
                 for _ in 0..n {
                     let maybe_byte = input.next();
                     match maybe_byte {

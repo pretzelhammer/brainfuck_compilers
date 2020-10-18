@@ -19,6 +19,8 @@ alias carx := compile-and-run-x86_64-example
 
 # formerly clang -nostdlib -fno-integrated-as
 # formerly clang -nostdlib -masm=intel
+
+
 compile-and-run-x86_64-example name:
     docker run -it -v $(pwd):/root/project -w /root/project/examples/x86_64 pretzelhammer/ubuntu-clang-qemu bash -c "clang -nostdlib -fno-integrated-as -Wa,-msyntax=intel,-mnaked-reg -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
@@ -46,11 +48,21 @@ compile-and-run-llvm-ir-example name:
 #build-alpine:
 #    docker build -f Dockerfile.alpine -t pretzelhammer/alpine-clang-qemu .
 
-interpret src-name:
-    cargo run --bin bf_interpreter -- input/{{src-name}}.b
+interpret name:
+    cargo run --bin bf_interpreter -- input/{{name}}.b
 
 build-interpreter:
     cargo build --bin bf_interpreter
+
+build-x86_64-compiler:
+    cargo build --bin bf_to_x86_64_compiler
+
+compile-and-run-bf-to-x86_64 name:
+    cargo run --bin bf_to_x86_64_compiler -- input/{{name}}.b output/x86_64/{{name}}.s
+    docker run -it -v $(pwd):/root/project -w /root/project/output/x86_64 pretzelhammer/ubuntu-clang-qemu bash -c "clang -nostdlib -fno-integrated-as -Wa,-msyntax=intel,-mnaked-reg -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
+
+alias carbx := compile-and-run-bf-to-x86_64
+
 
 test:
     cargo test
