@@ -4,51 +4,57 @@ use std::io::Write;
 
 use brainfuck_compilers::{ parse, Inst };
 
-const BOILERPLATE: &str = include_str!("x86_64_boilerplate.s");
+const BOILERPLATE: &str = include_str!("aarch64_boilerplate.s");
 
 const ASM: [&str; 8] = [
     // >
     "
-    add r12, {{N}}
+    add x19, x19, {{N}}
     ",
     // <
     "
-    sub r12, {{N}}
+    sub x19, x19, {{N}}
     ",
     // +
     "
-    addb [r12], {{N}}
+    ldrb w20, [x19]
+    add w20, w20, {{N}}
+    strb w20, [x19]
     ",
     // -
     "
-    subb [r12], {{N}}
+    ldrb w20, [x19]
+    sub w20, w20, {{N}}
+    strb w20, [x19]
     ",
     // ,
     "
-    mov rax, SYS_READ
-    mov rdi, STDIN
-    mov rsi, r12
-    mov rdx, 1
-    syscall
+    mov x8, SYS_READ
+    mov x0, STDIN
+    mov x1, x19
+    mov x2, 1
+    svc 0
     ",
     // .
     "
-    mov rax, SYS_WRITE
-    mov rdi, STDOUT
-    mov rsi, r12
-    mov rdx, 1
-    syscall
+    mov x8, SYS_WRITE
+    mov x0, STDOUT
+    mov x1, x19
+    mov x2, 1
+    svc 0
     ",
     // [
     "
-    cmpb [r12], 0
-    je LOOP_END_{{END}}
+    ldrb w20, [x19]
+    cmp w20, 0
+    b.eq LOOP_END_{{END}}
 LOOP_START_{{START}}:
     ",
     // ]
     "
-    cmpb [r12], 0
-    jne LOOP_START_{{START}}
+    ldrb w20, [x19]
+    cmp w20, 0
+    b.ne LOOP_START_{{START}}
 LOOP_END_{{END}}:
     ",
 ];

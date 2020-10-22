@@ -6,7 +6,7 @@
 ;;  - buf_len: u32 (offset 4)
 
 (module
-    ;; fd_write(fd, *iovec[], iovec_len, *bytes_written) -> bytes written
+    ;; fd_write(fd, *iovec[], iovec_len, *bytes_written) -> error number
     (import "wasi_snapshot_preview1" "fd_write"
         (func $fd_write (param i32 i32 i32 i32) (result i32)))
 
@@ -15,7 +15,7 @@
         (func $proc_exit (param i32)))
 
     ;; my best guess
-    ;; fd_read(fd, *iovec[], iovec_len, *bytes_read) -> bytes read
+    ;; fd_read(fd, *iovec[], iovec_len, *bytes_read) -> error number
     (import "wasi_snapshot_preview1" "fd_read"
         (func $fd_read (param i32 i32 i32 i32) (result i32)))
 

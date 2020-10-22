@@ -57,12 +57,26 @@ build-interpreter:
 build-x86_64-compiler:
     cargo build --bin bf_to_x86_64_compiler
 
+build-aarch64-compiler:
+    cargo build --bin bf_to_aarch64_compiler
+
+compile-and-run-bf-to-aarch64 name:
+    cargo run --bin bf_to_aarch64_compiler -- ./input/{{name}}.b ./output/aarch64/{{name}}.s
+    docker run -it -v $(pwd):/root/project -w /root/project/output/aarch64 pretzelhammer/ubuntu-clang-qemu bash -c "clang -nostdlib -fno-integrated-as -target aarch64-linux-gnu -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
+
+alias carba := compile-and-run-bf-to-aarch64
+
 compile-and-run-bf-to-x86_64 name:
-    cargo run --bin bf_to_x86_64_compiler -- input/{{name}}.b output/x86_64/{{name}}.s
+    cargo run --bin bf_to_x86_64_compiler -- ./input/{{name}}.b ./output/x86_64/{{name}}.s
     docker run -it -v $(pwd):/root/project -w /root/project/output/x86_64 pretzelhammer/ubuntu-clang-qemu bash -c "clang -nostdlib -fno-integrated-as -Wa,-msyntax=intel,-mnaked-reg -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
 alias carbx := compile-and-run-bf-to-x86_64
 
+compile-and-run-bf-to-wasm32-wasi name:
+    cargo run --bin bf_to_wasm32_wasi_compiler -- ./input/{{name}}.b ./output/wasm32-wasi/{{name}}.wat
+    wasmtime ./output/wasm32-wasi/{{name}}.wat
+
+alias carbw := compile-and-run-bf-to-wasm32-wasi
 
 test:
     cargo test

@@ -1,8 +1,10 @@
-// gnu assembly, aarch64 linux
+// ./examples/aarch64/exit.s
+
+// GNU Assembly, ARM syntax, aarch64 Linux
 
 .data
 
-.equ SYS_EXIT, 93
+.equ SYS_EXIT, 60
 .equ EXIT_CODE, 0
 
 .text

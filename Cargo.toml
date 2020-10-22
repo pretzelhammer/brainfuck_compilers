@@ -11,3 +11,11 @@ path = "src/bf_interpreter.rs"
 [[bin]]
 name = "bf_to_x86_64_compiler"
 path = "src/bf_to_x86_64_compiler.rs"
+
+[[bin]]
+name = "bf_to_aarch64_compiler"
+path = "src/bf_to_aarch64_compiler.rs"
+
+[[bin]]
+name = "bf_to_wasm32_wasi_compiler"
+path = "src/bf_to_wasm32_wasi_compiler.rs"
