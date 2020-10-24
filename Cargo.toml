@@ -1,5 +1,5 @@
 [package]
-name = "brainfuck-compilers"
+name = "brainfuck_compilers"
 version = "0.1.0"
 authors = ["pretzelhammer <7769424+pretzelhammer@users.noreply.github.com>"]
 edition = "2018"
@@ -19,3 +19,7 @@ path = "src/bf_to_aarch64_compiler.rs"
 [[bin]]
 name = "bf_to_wasm32_wasi_compiler"
 path = "src/bf_to_wasm32_wasi_compiler.rs"
+
+[[bin]]
+name = "bf_to_llvm_ir_compiler"
+path = "src/bf_to_llvm_ir_compiler.rs"

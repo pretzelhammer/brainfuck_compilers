@@ -33,7 +33,7 @@ define i8 @main() {
     %a.ptr = alloca i8              ; alloc space on stack for %a
     %b.ptr = alloca i8              ; alloc space on stack for %b
     store i8 90, i8* %a.ptr         ; set a to 90
-    store i8 222, i8* %b.ptr         ; set b to 35
+    store i8 222, i8* %b.ptr        ; set b to 35
     %a.val = load i8, i8* %a.ptr
     %b.val = load i8, i8* %b.ptr
 

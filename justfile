@@ -32,8 +32,12 @@ compile-and-run-wasm32-wasi-example name:
 alias carl := compile-and-run-llvm-ir-example
 
 compile-and-run-llvm-ir-example name:
-    docker run -it -v $(pwd):/root/project -w /root/project/examples/llvm-ir pretzelhammer/ubuntu-clang-qemu bash -c "clang -Wno-override-module {{name}}.ll -o {{name}}.out && ./{{name}}.out; echo \"Exit code: \$?\""
+    docker run -it -v $(pwd):/root/project -w /root/project/examples/llvm-ir pretzelhammer/ubuntu-clang-qemu bash -c "clang -Wno-override-module {{name}}.ll -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
+alias carc := compile-and-run-c-example
+
+compile-and-run-c-example name:
+    docker run -it -v $(pwd):/root/project -w /root/project/examples/c pretzelhammer/ubuntu-clang-qemu bash -c "clang {{name}}.c -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
 
 #run-arm-example example-name:
@@ -77,6 +81,12 @@ compile-and-run-bf-to-wasm32-wasi name:
     wasmtime ./output/wasm32-wasi/{{name}}.wat
 
 alias carbw := compile-and-run-bf-to-wasm32-wasi
+
+compile-and-run-bf-to-llvm-ir name:
+    cargo run --bin bf_to_llvm_ir_compiler -- ./input/{{name}}.b ./output/llvm-ir/{{name}}.ll
+    docker run -it -v $(pwd):/root/project -w /root/project/output/llvm-ir pretzelhammer/ubuntu-clang-qemu bash -c "clang -Wno-override-module {{name}}.ll -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
+
+alias carbl := compile-and-run-bf-to-llvm-ir
 
 test:
     cargo test

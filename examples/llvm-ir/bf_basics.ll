@@ -84,8 +84,6 @@ loop_start_0:
     %v.10 = sub i8 %v.9, 1
     store i8 %v.10, i8* %m.7
 
-    ; last run produced infinite loop sadge
-
     ; ]
     %i.16 = load i16, i16* @index
     %m.8 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @memory, i64 0, i16 %i.16
@@ -94,5 +92,5 @@ loop_start_0:
     br i1 %bool.1, label %loop_start_0, label %loop_end_0
 loop_end_0:
 
-    ret i8 %c.1
+    ret i8 %v.8
 }

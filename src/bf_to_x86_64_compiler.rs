@@ -53,7 +53,6 @@ LOOP_END_{{END}}:
     ",
 ];
 
-
 fn inst_to_asm(idx: usize, inst: &Inst) -> String {
     match inst {
         Inst::IncPtr(n) => {
