@@ -31,9 +31,10 @@ define i8 @main() {
     
     %idx.5 = load i64, i64* @index
     %ptr.3 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.5
-    
     %char.0 = call i8 @getchar()
-    store i8 %char.0, i8* %ptr.3
+    %bool.1 = icmp eq i8 255, %char.0
+    %char.1 = select i1 %bool.1, i8 0, i8 %char.0
+    store i8 %char.1, i8* %ptr.3
     
     %idx.6 = load i64, i64* @index
     %ptr.4 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.6
@@ -57,9 +58,8 @@ define i8 @main() {
     %idx.9 = load i64, i64* @index
     %ptr.7 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.9
     %char.2 = load i8, i8* %ptr.7
-    
     call i8 @putchar(i8 %char.2)
-    
+
     %idx.10 = load i64, i64* @index
     %ptr.8 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.10
     %byte.10 = load i8, i8* %ptr.8

@@ -1,6 +1,6 @@
 # ./examples/x86_64/echo_char.s
 
-# GNU Assembly, Linux x86_64
+# GNU Assembly, Intel syntax, Linux x86_64
 
 .data
 

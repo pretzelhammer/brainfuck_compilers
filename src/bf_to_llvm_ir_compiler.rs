@@ -6,80 +6,6 @@ use brainfuck_compilers::{ parse, Inst };
 
 const BOILERPLATE: &str = include_str!("llvm_ir_boilerplate.ll");
 
-/*
-const ASM: [&str; 11] = [
-    // > // 0
-    "
-    %intptr.{{INTPTR+1}} = add i64 %intptr.{{INTPTR}}, {{N}}
-    ",
-    // < // 1
-    "
-    %intptr.{{INTPTR+1}} = sub i64 %intptr.{{INTPTR}}, {{N}}
-    ",
-    // + // 2
-    "
-    %ptr.{{PTR}} = inttoptr i64 %intptr.{{INTPTR}} to i8*
-    %byte.{{BYTE}} = load i8, i8* %ptr.{{PTR}}
-    %byte.{{BYTE+1}} = add i8 %byte.{{BYTE}}, {{N}}
-    store i8 %byte.{{BYTE+1}}, i8* %ptr.{{PTR}}
-    ",
-    // - // 3
-    "
-    %ptr.{{PTR}} = inttoptr i64 %intptr.{{INTPTR}} to i8*
-    %byte.{{BYTE}} = load i8, i8* %ptr.{{PTR}}
-    %byte.{{BYTE+1}} = sub i8 %byte.{{BYTE}}, {{N}}
-    store i8 %byte.{{BYTE+1}}, i8* %ptr.{{PTR}}
-    ",
-    // before , // 4
-    "
-    %ptr.{{PTR}} = inttoptr i64 %intptr.{{INTPTR}} to i8*",
-    // on multiple , // 5
-    "
-    call i8 @getchar()
-    ",
-    // , // 6
-    "
-    %char.{{CHAR}} = call i8 @getchar()
-    %bool.{{BOOL}} = icmp eq i8 255, %char.{{CHAR}}
-    %char.{{CHAR+1}} = select i1 %bool.{{BOOL}}, i8 0, i8 %char.{{CHAR}}
-    store i8 %char.{{CHAR+1}}, i8* %ptr.{{PTR}}
-    ",
-    // . // 7
-    "
-    %ptr.{{PTR}} = inttoptr i64 %intptr.{{INTPTR}} to i8*
-    %char.{{CHAR}} = load i8, i8* %ptr.{{PTR}}
-",
-    // on multiple . // 8
-    "    call i8 @putchar(i8 %char.{{CHAR}})
-",
-    // [ // 9
-    "
-    %ptr.{{PTR}} = inttoptr i64 %intptr.{{INTPTR}} to i8*
-    %byte.{{BYTE}} = load i8, i8* %ptr.{{PTR}}
-    %bool.{{BOOL}} = icmp eq i8 0, %byte.{{BYTE}}
-    br i1 %bool.{{BOOL}}, label %loop_end_{{END}}, label %loop_start_{{START}}
-    loop_start_{{START}}:
-    ",
-    // ] // 10
-    "
-    %ptr.{{PTR}} = inttoptr i64 %intptr.{{INTPTR}} to i8*
-    %byte.{{BYTE}} = load i8, i8* %ptr.{{PTR}}
-    %bool.{{BOOL}} = icmp ne i8 0, %byte.{{BYTE}}
-    br i1 %bool.{{BOOL}}, label %loop_start_{{START}}, label %loop_end_{{END}}
-    loop_end_{{END}}:
-    ",
-];
-
-#[derive(Default)]
-struct Context {
-    intptr: usize,
-    ptr: usize,
-    byte: usize,
-    char: usize,
-    bool: usize,
-}
-*/
-
 const ASM: [&str; 11] = [
     // > // 0
     "
@@ -113,14 +39,12 @@ const ASM: [&str; 11] = [
     "
     %idx.{{IDX}} = load i64, i64* @index
     %ptr.{{PTR}} = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.{{IDX}}
-    ",
+",
     // on mulitple , // 5
-    "
-    call i8 @getchar()
-    ",
+    "    call i8 @getchar()
+",
     // , // 6
-    "
-    %char.{{CHAR}} = call i8 @getchar()
+    "    %char.{{CHAR}} = call i8 @getchar()
     %bool.{{BOOL}} = icmp eq i8 255, %char.{{CHAR}}
     %char.{{CHAR+1}} = select i1 %bool.{{BOOL}}, i8 0, i8 %char.{{CHAR}}
     store i8 %char.{{CHAR+1}}, i8* %ptr.{{PTR}}
@@ -130,11 +54,10 @@ const ASM: [&str; 11] = [
     %idx.{{IDX}} = load i64, i64* @index
     %ptr.{{PTR}} = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.{{IDX}}
     %char.{{CHAR}} = load i8, i8* %ptr.{{PTR}}
-    ",
+",
     // on multiple . // 8
-    "
-    call i8 @putchar(i8 %char.{{CHAR}})
-    ",
+    "    call i8 @putchar(i8 %char.{{CHAR}})
+",
     // [ // 9
     "
     %idx.{{IDX}} = load i64, i64* @index

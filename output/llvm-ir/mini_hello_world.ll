@@ -127,9 +127,8 @@ define i8 @main() {
     %idx.25 = load i64, i64* @index
     %ptr.15 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.25
     %char.0 = load i8, i8* %ptr.15
-    
     call i8 @putchar(i8 %char.0)
-    
+
     %idx.26 = load i64, i64* @index
     %ptr.16 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.26
     %byte.22 = load i8, i8* %ptr.16
@@ -139,9 +138,8 @@ define i8 @main() {
     %idx.27 = load i64, i64* @index
     %ptr.17 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.27
     %char.1 = load i8, i8* %ptr.17
-    
     call i8 @putchar(i8 %char.1)
-    
+
     %idx.28 = load i64, i64* @index
     %idx.29 = add i64 %idx.28, 1
     store i64 %idx.29, i64* @index
@@ -149,11 +147,9 @@ define i8 @main() {
     %idx.30 = load i64, i64* @index
     %ptr.18 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.30
     %char.2 = load i8, i8* %ptr.18
-    
     call i8 @putchar(i8 %char.2)
-    
     call i8 @putchar(i8 %char.2)
-    
+
     %idx.31 = load i64, i64* @index
     %idx.32 = add i64 %idx.31, 1
     store i64 %idx.32, i64* @index
@@ -161,9 +157,8 @@ define i8 @main() {
     %idx.33 = load i64, i64* @index
     %ptr.19 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.33
     %char.3 = load i8, i8* %ptr.19
-    
     call i8 @putchar(i8 %char.3)
-    
+
     %idx.34 = load i64, i64* @index
     %idx.35 = sub i64 %idx.34, 4
     store i64 %idx.35, i64* @index
@@ -177,9 +172,8 @@ define i8 @main() {
     %idx.37 = load i64, i64* @index
     %ptr.21 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.37
     %char.4 = load i8, i8* %ptr.21
-    
     call i8 @putchar(i8 %char.4)
-    
+
     %idx.38 = load i64, i64* @index
     %idx.39 = sub i64 %idx.38, 1
     store i64 %idx.39, i64* @index
@@ -193,9 +187,8 @@ define i8 @main() {
     %idx.41 = load i64, i64* @index
     %ptr.23 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.41
     %char.5 = load i8, i8* %ptr.23
-    
     call i8 @putchar(i8 %char.5)
-    
+
     %idx.42 = load i64, i64* @index
     %idx.43 = add i64 %idx.42, 5
     store i64 %idx.43, i64* @index
@@ -203,9 +196,8 @@ define i8 @main() {
     %idx.44 = load i64, i64* @index
     %ptr.24 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.44
     %char.6 = load i8, i8* %ptr.24
-    
     call i8 @putchar(i8 %char.6)
-    
+
     %idx.45 = load i64, i64* @index
     %idx.46 = add i64 %idx.45, 1
     store i64 %idx.46, i64* @index
@@ -213,9 +205,8 @@ define i8 @main() {
     %idx.47 = load i64, i64* @index
     %ptr.25 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.47
     %char.7 = load i8, i8* %ptr.25
-    
     call i8 @putchar(i8 %char.7)
-    
+
     %idx.48 = load i64, i64* @index
     %idx.49 = sub i64 %idx.48, 2
     store i64 %idx.49, i64* @index
@@ -223,9 +214,8 @@ define i8 @main() {
     %idx.50 = load i64, i64* @index
     %ptr.26 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.50
     %char.8 = load i8, i8* %ptr.26
-    
     call i8 @putchar(i8 %char.8)
-    
+
     %idx.51 = load i64, i64* @index
     %idx.52 = sub i64 %idx.51, 1
     store i64 %idx.52, i64* @index
@@ -239,8 +229,7 @@ define i8 @main() {
     %idx.54 = load i64, i64* @index
     %ptr.28 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.54
     %char.9 = load i8, i8* %ptr.28
-    
     call i8 @putchar(i8 %char.9)
-    
+
     ret i8 0
 }

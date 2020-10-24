@@ -1,6 +1,6 @@
 # ./examples/x86_64/exit.s
 
-# GNU Assembler, x86_64 Linux
+# GNU Assembler, Intel syntax, x86_64 Linux
 
 .data
 
@@ -12,6 +12,6 @@
 .global _start
 
 _start:
-    mov $SYS_EXIT, %rax         # set syscall number
-    mov $EXIT_CODE, %rdi        # set syscall argument
+    mov rax, SYS_EXIT           # set syscall number
+    mov rdi, EXIT_CODE          # set syscall argument
     syscall                     # make syscall
