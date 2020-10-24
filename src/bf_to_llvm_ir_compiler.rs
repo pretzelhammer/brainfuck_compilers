@@ -6,6 +6,7 @@ use brainfuck_compilers::{ parse, Inst };
 
 const BOILERPLATE: &str = include_str!("llvm_ir_boilerplate.ll");
 
+/*
 const ASM: [&str; 11] = [
     // > // 0
     "
@@ -77,32 +78,118 @@ struct Context {
     char: usize,
     bool: usize,
 }
+*/
+
+const ASM: [&str; 11] = [
+    // > // 0
+    "
+    %idx.{{IDX}} = load i64, i64* @index
+    %idx.{{IDX+1}} = add i64 %idx.{{IDX}}, {{N}}
+    store i64 %idx.{{IDX+1}}, i64* @index
+    ",
+    // < // 1
+    "
+    %idx.{{IDX}} = load i64, i64* @index
+    %idx.{{IDX+1}} = sub i64 %idx.{{IDX}}, {{N}}
+    store i64 %idx.{{IDX+1}}, i64* @index
+    ",
+    // + // 2
+    "
+    %idx.{{IDX}} = load i64, i64* @index
+    %ptr.{{PTR}} = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.{{IDX}}
+    %byte.{{BYTE}} = load i8, i8* %ptr.{{PTR}}
+    %byte.{{BYTE+1}} = add i8 %byte.{{BYTE}}, {{N}}
+    store i8 %byte.{{BYTE+1}}, i8* %ptr.{{PTR}}
+    ",
+    // - // 3
+    "
+    %idx.{{IDX}} = load i64, i64* @index
+    %ptr.{{PTR}} = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.{{IDX}}
+    %byte.{{BYTE}} = load i8, i8* %ptr.{{PTR}}
+    %byte.{{BYTE+1}} = sub i8 %byte.{{BYTE}}, {{N}}
+    store i8 %byte.{{BYTE+1}}, i8* %ptr.{{PTR}}
+    ",
+    // before , // 4
+    "
+    %idx.{{IDX}} = load i64, i64* @index
+    %ptr.{{PTR}} = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.{{IDX}}
+    ",
+    // on mulitple , // 5
+    "
+    call i8 @getchar()
+    ",
+    // , // 6
+    "
+    %char.{{CHAR}} = call i8 @getchar()
+    %bool.{{BOOL}} = icmp eq i8 255, %char.{{CHAR}}
+    %char.{{CHAR+1}} = select i1 %bool.{{BOOL}}, i8 0, i8 %char.{{CHAR}}
+    store i8 %char.{{CHAR+1}}, i8* %ptr.{{PTR}}
+    ",
+    // before . // 7
+    "
+    %idx.{{IDX}} = load i64, i64* @index
+    %ptr.{{PTR}} = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.{{IDX}}
+    %char.{{CHAR}} = load i8, i8* %ptr.{{PTR}}
+    ",
+    // on multiple . // 8
+    "
+    call i8 @putchar(i8 %char.{{CHAR}})
+    ",
+    // [ // 9
+    "
+    %idx.{{IDX}} = load i64, i64* @index
+    %ptr.{{PTR}} = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.{{IDX}}
+    %byte.{{BYTE}} = load i8, i8* %ptr.{{PTR}}
+    %bool.{{BOOL}} = icmp eq i8 0, %byte.{{BYTE}}
+    br i1 %bool.{{BOOL}}, label %loop_end_{{END}}, label %loop_start_{{START}}
+    loop_start_{{START}}:
+    ",
+    // ] // 10
+    "
+    %idx.{{IDX}} = load i64, i64* @index
+    %ptr.{{PTR}} = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.{{IDX}}
+    %byte.{{BYTE}} = load i8, i8* %ptr.{{PTR}}
+    %bool.{{BOOL}} = icmp ne i8 0, %byte.{{BYTE}}
+    br i1 %bool.{{BOOL}}, label %loop_start_{{START}}, label %loop_end_{{END}}
+    loop_end_{{END}}:
+    ",
+];
+
+#[derive(Default)]
+struct Context {
+    idx: usize,
+    ptr: usize,
+    byte: usize,
+    char: usize,
+    bool: usize,
+}
 
 fn inst_to_asm(idx: usize, inst: &Inst, ctx: &mut Context) -> String {
     match inst {
         Inst::IncPtr(n) => {
             let llvm = ASM[0]
                 .replace("{{N}}", &n.to_string())
-                .replace("{{INTPTR}}", &ctx.intptr.to_string())
-                .replace("{{INTPTR+1}}", &(ctx.intptr+1).to_string());
-            ctx.intptr += 1;
+                .replace("{{IDX}}", &ctx.idx.to_string())
+                .replace("{{IDX+1}}", &(ctx.idx+1).to_string());
+            ctx.idx += 2;
             llvm
         },
         Inst::DecPtr(n) => {
             let llvm = ASM[1]
                 .replace("{{N}}", &n.to_string())
-                .replace("{{INTPTR}}", &ctx.intptr.to_string())
-                .replace("{{INTPTR+1}}", &(ctx.intptr+1).to_string());
-            ctx.intptr += 1;
+                .replace("{{IDX}}", &ctx.idx.to_string())
+                .replace("{{IDX+1}}", &(ctx.idx+1).to_string());
+            ctx.idx += 2;
             llvm
         },
         Inst::IncByte(n) => {
             let llvm = ASM[2]
                 .replace("{{N}}", &n.to_string())
                 .replace("{{PTR}}", &ctx.ptr.to_string())
-                .replace("{{INTPTR}}", &ctx.intptr.to_string())
+                .replace("{{IDX}}", &ctx.idx.to_string())
                 .replace("{{BYTE}}", &ctx.byte.to_string())
                 .replace("{{BYTE+1}}", &(ctx.byte+1).to_string());
+            ctx.idx += 1;
             ctx.ptr += 1;
             ctx.byte += 2;
             llvm
@@ -111,16 +198,17 @@ fn inst_to_asm(idx: usize, inst: &Inst, ctx: &mut Context) -> String {
             let llvm = ASM[3]
                 .replace("{{N}}", &n.to_string())
                 .replace("{{PTR}}", &ctx.ptr.to_string())
-                .replace("{{INTPTR}}", &ctx.intptr.to_string())
+                .replace("{{IDX}}", &ctx.idx.to_string())
                 .replace("{{BYTE}}", &ctx.byte.to_string())
                 .replace("{{BYTE+1}}", &(ctx.byte+1).to_string());
+            ctx.idx += 1;
             ctx.ptr += 1;
             ctx.byte += 2;
             llvm
         },
         Inst::ReadByte(n) => {
             let mut llvm = ASM[4]
-                .replace("{{INTPTR}}", &ctx.intptr.to_string())
+                .replace("{{IDX}}", &ctx.idx.to_string())
                 .replace("{{PTR}}", &ctx.ptr.to_string());
             for _ in 0..n-1 {
                 llvm.push_str(ASM[5]);
@@ -131,6 +219,7 @@ fn inst_to_asm(idx: usize, inst: &Inst, ctx: &mut Context) -> String {
                 .replace("{{PTR}}", &ctx.ptr.to_string())
                 .replace("{{BOOL}}", &ctx.bool.to_string())
             );
+            ctx.idx += 1;
             ctx.ptr += 1;
             ctx.bool += 1;
             ctx.char += 2;
@@ -138,25 +227,27 @@ fn inst_to_asm(idx: usize, inst: &Inst, ctx: &mut Context) -> String {
         },
         Inst::WriteByte(n) => {
             let mut llvm = ASM[7]
-                .replace("{{INTPTR}}", &ctx.intptr.to_string())
+                .replace("{{IDX}}", &ctx.idx.to_string())
                 .replace("{{PTR}}", &ctx.ptr.to_string())
                 .replace("{{CHAR}}", &ctx.char.to_string());
             let write_byte = ASM[8].replace("{{CHAR}}", &ctx.char.to_string());
             for _ in 0..*n {
                 llvm.push_str(&write_byte);
             }
+            ctx.idx += 1;
             ctx.ptr += 1;
             ctx.char += 1;
             llvm
         },
         Inst::LoopStart(_, goto) => {
             let llvm = ASM[9]
-                .replace("{{INTPTR}}", &ctx.intptr.to_string())
+                .replace("{{IDX}}", &ctx.idx.to_string())
                 .replace("{{PTR}}", &ctx.ptr.to_string())
                 .replace("{{BYTE}}", &ctx.byte.to_string())
                 .replace("{{BOOL}}", &ctx.bool.to_string())
                 .replace("{{START}}", &idx.to_string())
                 .replace("{{END}}", &(goto-1).to_string());
+            ctx.idx += 1;
             ctx.ptr += 1;
             ctx.byte += 1;
             ctx.bool += 1;
@@ -164,12 +255,13 @@ fn inst_to_asm(idx: usize, inst: &Inst, ctx: &mut Context) -> String {
         },
         Inst::LoopEnd(_, goto) => {
             let llvm = ASM[10]
-                .replace("{{INTPTR}}", &ctx.intptr.to_string())
+                .replace("{{IDX}}", &ctx.idx.to_string())
                 .replace("{{PTR}}", &ctx.ptr.to_string())
                 .replace("{{BYTE}}", &ctx.byte.to_string())
                 .replace("{{BOOL}}", &ctx.bool.to_string())
                 .replace("{{END}}", &idx.to_string())
                 .replace("{{START}}", &(goto-1).to_string());
+            ctx.idx += 1;
             ctx.ptr += 1;
             ctx.byte += 1;
             ctx.bool += 1;
