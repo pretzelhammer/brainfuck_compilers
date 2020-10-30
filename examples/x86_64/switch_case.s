@@ -1,4 +1,4 @@
-# ./examples/x86_64/echo_char.s
+# ./examples/x86_64/switch_case.s
 
 # GNU Assembly, Intel syntax, Linux x86_64
 

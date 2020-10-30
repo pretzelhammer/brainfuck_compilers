@@ -5,7 +5,7 @@
     (import "wasi_snapshot_preview1" "fd_write"
         (func $fd_write (param i32 i32 i32 i32) (result i32)))
 
-    ;; fd_read(fd, *iovec[], iovec_len, *bytes_read) -> error number
+    ;; fd_read(fd, iovec[]*, iovec_len, bytes_read*) -> error_number
     (import "wasi_snapshot_preview1" "fd_read"
         (func $fd_read (param i32 i32 i32 i32) (result i32)))
 

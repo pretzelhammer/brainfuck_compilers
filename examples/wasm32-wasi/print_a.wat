@@ -2,7 +2,7 @@
     (import "wasi_snapshot_preview1" "proc_exit"
         (func $proc_exit (param i32)))
 
-    ;; fd_write(fd, iovec[]*, iovec_len, nwritten*) -> bytes written
+    ;; fd_write(fd, iovec[]*, iovec_len, bytes_written*) -> error_number
     (import "wasi_snapshot_preview1" "fd_write"
         (func $fd_write (param i32 i32 i32 i32) (result i32)))
 

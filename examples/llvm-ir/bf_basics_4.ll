@@ -57,35 +57,38 @@ define i8 @main() {
     %idx.12 = load i64, i64* @index
     %ptr.4 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.12
     %char.0 = call i8 @getchar()
-    ; missing EOF -1 -> 0 check
-    store i8 %char.0, i8* %ptr.4
+    %bool.0 = icmp eq i8 255, %char.0
+    %char.1 = select i1 %bool.0, i8 0, i8 %char.0
+    store i8 %char.1, i8* %ptr.4
 
     ; ,,
     %idx.13 = load i64, i64* @index
     %ptr.5 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.13
     call i8 @getchar()
-    %char.1 = call i8 @getchar()
-    store i8 %char.1, i8* %ptr.5
+    %char.2 = call i8 @getchar()
+    %bool.1 = icmp eq i8 255, %char.2
+    %char.3 = select i1 %bool.1, i8 0, i8 %char.2
+    store i8 %char.3, i8* %ptr.5
 
     ; .
     %idx.14 = load i64, i64* @index
     %ptr.6 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.14
-    %char.2 = load i8, i8* %ptr.6
-    call i8 @putchar(i8 %char.2)
+    %char.4 = load i8, i8* %ptr.6
+    call i8 @putchar(i8 %char.4)
 
     ; ..
     %idx.15 = load i64, i64* @index
     %ptr.7 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.15
-    %char.3 = load i8, i8* %ptr.7
-    call i8 @putchar(i8 %char.3)
-    call i8 @putchar(i8 %char.3)
+    %char.5 = load i8, i8* %ptr.7
+    call i8 @putchar(i8 %char.5)
+    call i8 @putchar(i8 %char.5)
 
     ; [
     %idx.16 = load i64, i64* @index
     %ptr.8 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.16
     %byte.8 = load i8, i8* %ptr.8
-    %bool.0 = icmp eq i8 0, %byte.8
-    br i1 %bool.0, label %loop_end_2, label %loop_start_0
+    %bool.2 = icmp eq i8 0, %byte.8
+    br i1 %bool.2, label %loop_end_2, label %loop_start_0
 loop_start_0:
 
     ; - (subtract in loop)
@@ -99,8 +102,8 @@ loop_start_0:
     %idx.18 = load i64, i64* @index
     %ptr.10 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.18
     %byte.11 = load i8, i8* %ptr.10
-    %bool.1 = icmp ne i8 0, %byte.11
-    br i1 %bool.1, label %loop_start_0, label %loop_end_2
+    %bool.3 = icmp ne i8 0, %byte.11
+    br i1 %bool.3, label %loop_start_0, label %loop_end_2
 loop_end_2:
 
     ret i8 %byte.11
