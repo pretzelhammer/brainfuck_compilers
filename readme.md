@@ -42,7 +42,7 @@ Exit Code: 0
 
 ### `just carw {{name}}`
 
-`carw` is short for *"compile and run wasm32-wasi example"* and `{{name}}` is the name of the wasm32-wasi source file (without `.wat` extension) in the `./examples/wasm32-wasi/` directory. This command also automatically appends `Exit code: <code>` to the end of the program's output which logs which code it exited with.
+`carw` is short for *"compile and run WebAssembly example"* and `{{name}}` is the name of the WebAssembly source file (without `.wat` extension) in the `./examples/wasm32_wasi/` directory. This command also automatically appends `Exit code: <code>` to the end of the program's output which logs which code it exited with.
 
 Example
 
@@ -54,7 +54,7 @@ Exit Code: 0
 
 ### `just carl {{name}}`
 
-`carl` is short for *"compile and run LLVM IR example"* and `{{name}}` is the name of the LLVM IR source file (without `.ll` extension) in the `./examples/llvm-ir/` directory. This command also automatically appends `Exit code: <code>` to the end of the program's output which logs which code it exited with.
+`carl` is short for *"compile and run LLVM IR example"* and `{{name}}` is the name of the LLVM IR source file (without `.ll` extension) in the `./examples/llvm_ir/` directory. This command also automatically appends `Exit code: <code>` to the end of the program's output which logs which code it exited with.
 
 Example
 
@@ -107,7 +107,7 @@ Hello world!
 
 ### `just carbw {{name}}`
 
-`carbw` is short for *"compile and run brainfuck to wasm32-wasi"* and `{{name}}` is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. The output wasm32-wasi source file is written to `./output/wasm32-wasi/{{name}}.wat` and then run immediately.
+`carbw` is short for *"compile and run brainfuck to WebAssembly"* and `{{name}}` is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. The output WebAssembly source file is written to `./output/wasm32_wasi/{{name}}.wat` and then run immediately.
 
 Example
 
@@ -118,7 +118,7 @@ Hello world!
 
 ### `just carbl {{name}}`
 
-`carbl` is short for *"compile and run brainfuck to LLVM IR"* and `{{name}}` is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. The output LLVM IR source file is written to `./output/llvm-ir/{{name}}.ll` and then assembled and run immediately.
+`carbl` is short for *"compile and run brainfuck to LLVM IR"* and `{{name}}` is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. The output LLVM IR source file is written to `./output/llvm_ir/{{name}}.ll` and then assembled and run immediately.
 
 Example
 
