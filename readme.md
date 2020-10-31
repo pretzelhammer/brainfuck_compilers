@@ -153,22 +153,26 @@ Times how long it takes to interpret and run the compiled versions of `{{name}}`
 4.95s user 0.01s system 99% cpu 4.960 total
 
 # x86_64 compiled mandlebrot.b
-real	0m1.214s
-user	0m1.149s
-sys	    0m0.041s
+real    0m1.214s
+user    0m1.149s
+sys     0m0.041s
 
 # aarch64 compiled mandlebrot.b
-real	0m4.206s
-user	0m4.103s
-sys	    0m0.083s
+real    0m4.206s
+user    0m4.103s
+sys     0m0.083s
 
 # wasm32-wasi compiled mandlebrot.b
-real	0m1.480s
-user	0m1.429s
-sys	    0m0.046s
+real    0m1.480s
+user    0m1.429s
+sys     0m0.046s
 
 # llvm-ir compiled mandlebrot.b
-real	0m0.896s
-user	0m0.887s
-sys	    0m0.001s
+real    0m0.896s
+user    0m0.887s
+sys     0m0.001s
 ```
+
+## Licensing
+
+To be compatible with [Rust](https://github.com/rust-lang/rust), all code in this repository (unless otherwise stated in the source file) is licensed under [Apache License Version 2.0](./license-apache) or [MIT License](./license-mit), at your option.

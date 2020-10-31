@@ -6,20 +6,20 @@ edition = "2018"
 
 [[bin]]
 name = "bf_interpreter"
-path = "src/bf_interpreter.rs"
+path = "src/interpreter.rs"
 
 [[bin]]
 name = "bf_to_x86_64_compiler"
-path = "src/bf_to_x86_64_compiler.rs"
+path = "src/x86_64/compiler.rs"
 
 [[bin]]
 name = "bf_to_aarch64_compiler"
-path = "src/bf_to_aarch64_compiler.rs"
+path = "src/aarch64/compiler.rs"
 
 [[bin]]
 name = "bf_to_wasm32_wasi_compiler"
-path = "src/bf_to_wasm32_wasi_compiler.rs"
+path = "src/wasm32_wasi/compiler.rs"
 
 [[bin]]
 name = "bf_to_llvm_ir_compiler"
-path = "src/bf_to_llvm_ir_compiler.rs"
+path = "src/llvm_ir/compiler.rs"

@@ -1,6 +1,6 @@
 // ./examples/aarch64/exit.s
 
-// GNU Assembly, ARM syntax, aarch64 Linux
+// GNU Assembler, ARM syntax, aarch64 Linux
 
 .data
 

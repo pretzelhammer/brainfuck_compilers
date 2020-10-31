@@ -1,6 +1,6 @@
 // ./examples/aarch64/print_a.s
 
-// GNU Assembly, ARM syntax, aarch64 Linux
+// GNU Assembler, ARM syntax, aarch64 Linux
 
 .data
 

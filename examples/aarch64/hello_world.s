@@ -1,4 +1,4 @@
-// gnu assembly, aarch64 linux
+// GNU Assembler, ARM syntax, aarch64 Linux
 
 .data
 

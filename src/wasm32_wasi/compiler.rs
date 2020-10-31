@@ -4,7 +4,7 @@ use std::io::Write;
 
 use brainfuck_compilers::{ parse, Inst };
 
-const BOILERPLATE: &str = include_str!("wasm32_wasi_boilerplate.wat");
+const BOILERPLATE: &str = include_str!("boilerplate.wat");
 
 const ASM: [&str; 10] = [
     // >

@@ -1,6 +1,4 @@
-// ./examples/aarch64/switch_case.s
-
-// GNU Assembly, aarch64 Linux
+// GNU Assembly, ARM syntax, aarch64 Linux
 
 .data
 

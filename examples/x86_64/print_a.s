@@ -1,6 +1,6 @@
 # ./examples/x86_64/print_a.s
 
-# GNU Assembly, Intel syntax, Linux x86_64
+# GNU Assembler, Intel syntax, x86_64 Linux
 
 .data
 

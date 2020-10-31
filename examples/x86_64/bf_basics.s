@@ -1,6 +1,6 @@
 # ./examples/x86_64/bf_basics.s
 
-# GNU Assembly, Intel syntax, x86_64 Linux
+# GNU Assembler, Intel syntax, x86_64 Linux
 
 .data
 

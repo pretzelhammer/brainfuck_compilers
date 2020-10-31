@@ -4,7 +4,7 @@ use std::io::Write;
 
 use brainfuck_compilers::{ parse, Inst };
 
-const BOILERPLATE: &str = include_str!("llvm_ir_boilerplate.ll");
+const BOILERPLATE: &str = include_str!("boilerplate.ll");
 
 const ASM: [&str; 11] = [
     // > // 0

@@ -1,3 +1,5 @@
+// GNU Assembler, ARM syntax, aarch64 Linux
+
 .data
 
 .equ SYS_EXIT, 93
