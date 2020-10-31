@@ -28,7 +28,7 @@
         local.get $ptr
         local.get $ptr
         i32.load8_u
-        i32.const 10
+        i32.const 1
         i32.add
         i32.store8
     
@@ -40,39 +40,50 @@
         loop
     
         local.get $ptr
+        local.get $ptr
+        i32.load8_u
         i32.const 1
-        i32.add
+        i32.sub
+        i32.store8
+    
+        block
+        local.get $ptr
+        i32.load8_u
+        i32.eqz
+        br_if 0
+        loop
+    
+        local.get $ptr
+        i32.const 2
+        i32.sub
         local.set $ptr
+    
+        block
+        local.get $ptr
+        i32.load8_u
+        i32.eqz
+        br_if 0
+        loop
     
         local.get $ptr
         local.get $ptr
         i32.load8_u
-        i32.const 7
+        i32.const 1
         i32.add
         i32.store8
     
-        local.get $ptr
-        i32.const 1
-        i32.add
-        local.set $ptr
-    
-        local.get $ptr
+        block
         local.get $ptr
         i32.load8_u
-        i32.const 10
-        i32.add
-        i32.store8
-    
-        local.get $ptr
-        i32.const 1
-        i32.add
-        local.set $ptr
+        i32.eqz
+        br_if 0
+        loop
     
         local.get $ptr
         local.get $ptr
         i32.load8_u
         i32.const 3
-        i32.add
+        i32.sub
         i32.store8
     
         local.get $ptr
@@ -81,15 +92,43 @@
         local.set $ptr
     
         local.get $ptr
+        i32.load8_u
+        br_if 0
+        end
+        end
+
+        local.get $ptr
         local.get $ptr
         i32.load8_u
         i32.const 1
-        i32.add
+        i32.sub
         i32.store8
     
+        block
         local.get $ptr
-        i32.const 4
+        i32.load8_u
+        i32.eqz
+        br_if 0
+        loop
+    
+        local.get $ptr
+        i32.const 3
         i32.sub
+        local.set $ptr
+    
+        local.get $ptr
+        i32.load8_u
+        br_if 0
+        end
+        end
+        end
+        end
+        end
+        end
+
+        local.get $ptr
+        i32.const 3
+        i32.add
         local.set $ptr
     
         local.get $ptr
@@ -113,131 +152,9 @@
         local.get $ptr
         local.get $ptr
         i32.load8_u
-        i32.const 2
-        i32.add
-        i32.store8
-    
-        i32.const 30004
-        local.get $ptr
-        i32.store
         i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        local.get $ptr
-        i32.const 1
-        i32.add
-        local.set $ptr
-    
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const 1
-        i32.add
-        i32.store8
-    
-        i32.const 30004
-        local.get $ptr
-        i32.store
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const 7
-        i32.add
-        i32.store8
-    
-        i32.const 30004
-        local.get $ptr
-        i32.store
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const 3
-        i32.add
-        i32.store8
-    
-        i32.const 30004
-        local.get $ptr
-        i32.store
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        local.get $ptr
-        i32.const 1
-        i32.add
-        local.set $ptr
-    
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const 2
-        i32.add
-        i32.store8
-    
-        i32.const 30004
-        local.get $ptr
-        i32.store
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        local.get $ptr
-        i32.const 2
         i32.sub
-        local.set $ptr
-    
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const 15
-        i32.add
         i32.store8
-    
-        i32.const 30004
-        local.get $ptr
-        i32.store
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        local.get $ptr
-        i32.const 1
-        i32.add
-        local.set $ptr
     
         i32.const 30004
         local.get $ptr
@@ -253,40 +170,6 @@
         local.get $ptr
         i32.load8_u
         i32.const 3
-        i32.add
-        i32.store8
-    
-        i32.const 30004
-        local.get $ptr
-        i32.store
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const 6
-        i32.sub
-        i32.store8
-    
-        i32.const 30004
-        local.get $ptr
-        i32.store
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const 8
         i32.sub
         i32.store8
     
@@ -303,6 +186,65 @@
         local.get $ptr
         i32.const 1
         i32.add
+        local.set $ptr
+    
+        i32.const 30004
+        local.get $ptr
+        i32.store
+        i32.const 1
+        i32.const 30004
+        i32.const 1
+        i32.const 30012
+        call $fd_write
+        drop
+    
+        i32.const 1
+        i32.const 30004
+        i32.const 1
+        i32.const 30012
+        call $fd_write
+        drop
+    
+        local.get $ptr
+        i32.const 1
+        i32.add
+        local.set $ptr
+    
+        i32.const 30004
+        local.get $ptr
+        i32.store
+        i32.const 1
+        i32.const 30004
+        i32.const 1
+        i32.const 30012
+        call $fd_write
+        drop
+    
+        local.get $ptr
+        i32.const 4
+        i32.sub
+        local.set $ptr
+    
+        local.get $ptr
+        local.get $ptr
+        i32.load8_u
+        i32.const 1
+        i32.sub
+        i32.store8
+    
+        i32.const 30004
+        local.get $ptr
+        i32.store
+        i32.const 1
+        i32.const 30004
+        i32.const 1
+        i32.const 30012
+        call $fd_write
+        drop
+    
+        local.get $ptr
+        i32.const 1
+        i32.sub
         local.set $ptr
     
         local.get $ptr
@@ -323,9 +265,61 @@
         drop
     
         local.get $ptr
+        i32.const 5
+        i32.add
+        local.set $ptr
+    
+        i32.const 30004
+        local.get $ptr
+        i32.store
+        i32.const 1
+        i32.const 30004
+        i32.const 1
+        i32.const 30012
+        call $fd_write
+        drop
+    
+        local.get $ptr
         i32.const 1
         i32.add
         local.set $ptr
+    
+        i32.const 30004
+        local.get $ptr
+        i32.store
+        i32.const 1
+        i32.const 30004
+        i32.const 1
+        i32.const 30012
+        call $fd_write
+        drop
+    
+        local.get $ptr
+        i32.const 2
+        i32.sub
+        local.set $ptr
+    
+        i32.const 30004
+        local.get $ptr
+        i32.store
+        i32.const 1
+        i32.const 30004
+        i32.const 1
+        i32.const 30012
+        call $fd_write
+        drop
+    
+        local.get $ptr
+        i32.const 1
+        i32.sub
+        local.set $ptr
+    
+        local.get $ptr
+        local.get $ptr
+        i32.load8_u
+        i32.const 1
+        i32.sub
+        i32.store8
     
         i32.const 30004
         local.get $ptr
