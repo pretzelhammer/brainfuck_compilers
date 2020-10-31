@@ -1,11 +1,11 @@
 ; hello world example from llvm lang ref docs
 
 ; Declare the string constant as a global constant.
-@.str = private unnamed_addr constant [13 x i8] c"hello world\0A\00"
+@.str = private unnamed_addr constant [14 x i8] c"Hello world!\0A\00"
 
 ; - global labels start with an @ character
 ; - all global vars are pointer types to their data,
-;   so @.str above has type [13 x i8]*
+;   so @.str above has type [14 x i8]*
 ; - "constant" means it's immutable, "global" would make it mutable
 ; - "private" is an optional visibility modifier, means: "Global
 ; values with “private” linkage are only directly accessible by
@@ -21,7 +21,7 @@
 ; the same initializer. Note that a constant with significant address
 ; can be merged with a unnamed_addr constant, the result being a
 ; constant whose address is significant."
-; "[13 x i8]" is the global's type, array of 13 i8s
+; "[14 x i8]" is the global's type, array of 14 i8s
 
 ; integer types follow the form:
 ; i<N>
@@ -127,7 +127,7 @@ declare i32 @puts(i8* nocapture) nounwind
 define i32 @main() {   ; i32()*
 
   ; Convert [13 x i8]* to i8* (wtf is this shit)
-  %cast210 = getelementptr [13 x i8], [13 x i8]* @.str, i64 0, i64 0
+  %cast210 = getelementptr [14 x i8], [14 x i8]* @.str, i64 0, i64 0
 
   ; Call puts function to write out the string to stdout
   call i32 @puts(i8* %cast210)

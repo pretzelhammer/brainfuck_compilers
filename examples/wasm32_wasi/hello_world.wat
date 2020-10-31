@@ -11,12 +11,12 @@
 
     ;; Write 'hello world\n' to memory at an offset of 8 bytes
     ;; Note the trailing newline which is required for the text to appear
-    (data (i32.const 8) "hello world\n")
+    (data (i32.const 8) "Hello world!\n")
 
     (func $_start  ;; (export "_start")
         ;; Creating a new io vector within linear memory
-        (i32.store (i32.const 0) (i32.const 8))  ;; iov.iov_base - This is a pointer to the start of the 'hello world\n' string
-        (i32.store (i32.const 4) (i32.const 12))  ;; iov.iov_len - The length of the 'hello world\n' string
+        (i32.store (i32.const 0) (i32.const 8))  ;; iov.iov_base - This is a pointer to the start of the "Hello world!\n" string
+        (i32.store (i32.const 4) (i32.const 13))  ;; iov.iov_len - The length of the "Hello world!\n" string
 
         (call $fd_write
             (i32.const 1) ;; file_descriptor - 1 for stdout
