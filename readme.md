@@ -2,6 +2,8 @@
 
 This is the companion code repository for the article [Learn Assembly with Entirely Too Many Brainfuck Compilers]().
 
+
+
 ## Initial Setup
 
 To run all the code in this repo you need the following: an x86_64 host machine, Rust installed, and Docker installed. I can't help you with the first requirement but for the latter two requirements:
@@ -11,6 +13,8 @@ To run all the code in this repo you need the following: an x86_64 host machine,
 Once you have completed the above requirements the next step is to use Rust's package manager, Cargo, to install the [Just command runner](https://github.com/casey/just) with `cargo install just`. Make sure you have `$HOME/.cargo/bin` in your `PATH`.
 
 The final setup step is to run `just build-env` which builds a Docker image on your machine from [this Dockerfile](). Running this command may take a few minutes. The Docker image contains all the necessary dependencies to build and run all the examples in this repo.
+
+
 
 ## Running examples
 
@@ -64,7 +68,9 @@ Hello world!
 Exit Code: 0
 ```
 
-## Running the brainfuck interpreter
+
+
+## Interpreting brainfuck
 
 All of the brainfuck source files are in the `./input` directory.
 
@@ -79,7 +85,9 @@ Example
 Hello world!
 ```
 
-## Running the brainfuck compilers
+
+
+## Compiling brainfuck
 
 All of the brainfuck source files are in the `./input` directory. All of the commands below _only work_ if you've already run `just build-env` as instructed above.
 
@@ -127,8 +135,6 @@ Example
 Hello world!
 ```
 
-## Running benchmarks
-
 ### `just cbat {{name}}`
 
 `cbat` is short for *"compile brainfuck to all targets"* and `{{name}}` is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. The output files are written to the `./output/` directory in their relevant subdirectories.
@@ -138,6 +144,10 @@ Example
 ```sh
 > just cbat hello_world
 ```
+
+
+
+## Running benchmarks
 
 ### `just benchmark {{name}}`
 
@@ -172,6 +182,8 @@ real    0m0.896s
 user    0m0.887s
 sys     0m0.001s
 ```
+
+
 
 ## Licensing
 
