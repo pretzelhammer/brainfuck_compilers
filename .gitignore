@@ -1,5 +1,6 @@
-
+# no need to check-in binary files
 *.out
+*.wasm
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,osx,linux,windows,rust,vscode
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,osx,linux,windows,rust,vscode

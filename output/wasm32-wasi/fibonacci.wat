@@ -38,14 +38,14 @@
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
@@ -62,7 +62,7 @@
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
@@ -72,7 +72,7 @@
         i32.const 0
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_read
         drop
     
@@ -82,7 +82,7 @@
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
@@ -92,7 +92,7 @@
         i32.const 0
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_read
         drop
     
@@ -102,14 +102,14 @@
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
@@ -828,7 +828,7 @@
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
@@ -921,7 +921,7 @@
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
@@ -1071,7 +1071,7 @@
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     
@@ -1086,7 +1086,7 @@
         i32.const 1
         i32.const 30004
         i32.const 1
-        i32.const 30016
+        i32.const 30012
         call $fd_write
         drop
     

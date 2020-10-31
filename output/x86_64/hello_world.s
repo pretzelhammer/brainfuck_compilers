@@ -26,7 +26,7 @@ _start:
     
     cmpb [r12], 0
     je LOOP_END_12
-    LOOP_START_1:
+LOOP_START_1:
     
     add r12, 1
     
@@ -50,7 +50,7 @@ _start:
     
     cmpb [r12], 0
     jne LOOP_START_1
-    LOOP_END_12:
+LOOP_END_12:
     
     add r12, 1
     
