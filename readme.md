@@ -10,7 +10,7 @@ To run all the code in this repo you need the following: an x86_64 host machine,
 
 Once you have completed the above requirements the next step is to use Rust's package manager, Cargo, to install the [Just command runner](https://github.com/casey/just) with `cargo install just`. Make sure you have `$HOME/.cargo/bin` in your `PATH`.
 
-The final setup step is to run `just build-env` which builds a Docker image on your machine from [this Dockerfile]. Running this command may take a few minutes. The Docker image contains all the necessary dependencies to build and run all the examples in this repo.
+The final setup step is to run `just build-env` which builds a Docker image on your machine from [this Dockerfile](). Running this command may take a few minutes. The Docker image contains all the necessary dependencies to build and run all the examples in this repo.
 
 ## Running examples
 
@@ -125,4 +125,50 @@ Example
 ```sh
 > just carbl hello_world
 Hello world!
+```
+
+## Running benchmarks
+
+### `just cbat {{name}}`
+
+`cbat` is short for *"compile brainfuck to all targets"* and `{{name}}` is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. The output files are written to the `./output/` directory in their relevant subdirectories.
+
+Example
+
+```sh
+> just cbat hello_world
+```
+
+### `just benchmark {{name}}`
+
+Times how long it takes to interpret and run the compiled versions of `{{name}}` where name is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. If this command doesn't work for whatever reason it's because you should run `just cbat {{name}}` first.
+
+```sh
+> just cbat mandlebrot
+> just benchmark mandlebrot
+
+# program outputs omitted
+
+# interpreted mandlebrot.b
+4.95s user 0.01s system 99% cpu 4.960 total
+
+# x86_64 compiled mandlebrot.b
+real	0m1.214s
+user	0m1.149s
+sys	    0m0.041s
+
+# aarch64 compiled mandlebrot.b
+real	0m4.206s
+user	0m4.103s
+sys	    0m0.083s
+
+# wasm32-wasi compiled mandlebrot.b
+real	0m1.480s
+user	0m1.429s
+sys	    0m0.046s
+
+# llvm-ir compiled mandlebrot.b
+real	0m0.896s
+user	0m0.887s
+sys	    0m0.001s
 ```

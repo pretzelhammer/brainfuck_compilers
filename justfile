@@ -25,9 +25,10 @@ alias carbl := compile-and-run-bf-to-llvm-ir
 # commands to compile code & run benchmarks
 
 
-alias cball := compile-bf-to-all
+alias cbat := compile-bf-to-all-targets
 
-compile-bf-to-all name:
+compile-bf-to-all-targets name:
+    cargo build --release --bin bf_interpreter
     cargo run --release --bin bf_to_x86_64_compiler -- ./input/{{name}}.b ./output/x86_64/{{name}}.s
     cargo run --release --bin bf_to_aarch64_compiler -- ./input/{{name}}.b ./output/aarch64/{{name}}.s
     cargo run --release --bin bf_to_wasm32_wasi_compiler -- ./input/{{name}}.b ./output/wasm32-wasi/{{name}}.wat
