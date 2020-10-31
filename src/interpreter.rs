@@ -176,25 +176,6 @@ mod tests {
     }
 
     #[test]
-    fn run_prints_abc() {
-        let src = include_str!("../input/prints_abc.b");
-        let input = [].bytes();
-        let mut output = Vec::new();
-
-        let result = parse_and_run(src, input, &mut output);
-        assert!(result.is_ok());
-
-        let output_result = std::str::from_utf8(&output);
-        assert!(output_result.is_ok());
-        let output_str = output_result.unwrap();
-        
-        assert_eq!(
-            "abc\n",
-            output_str,
-        );
-    }
-
-    #[test]
     fn run_quine() {
         let src = include_str!("../input/quine.b");
         let input = [].bytes();
