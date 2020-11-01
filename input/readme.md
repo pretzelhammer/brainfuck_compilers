@@ -1,6 +1,6 @@
 # Small Collection of Brainfuck Programs
 
-If you'd like to learn more about brainfuck please read the [What is brainfuck?]() and [Interpreting brainfuck]() sections of [Learn Assembly with Entirely Too Many Brainfuck Compilers]().
+If you'd like to learn more about brainfuck please read the [What is brainfuck?](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md#what-is-brainfuck) and [Interpreting brainfuck](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md#interpreting-brainfuck) sections of [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md).
 
 The programs, what they do, and example output:
 

@@ -1,22 +1,12 @@
 # Compiled brainfuck programs
 
-This is the output directory for all the brainfuck compilers. If you'd like to learn more about compiling brainfuck you should read [Learn Assembly with Entirely Too Many Brainfuck Compilers]().
+This is the output directory for all the brainfuck compilers. If you'd like to learn more about compiling brainfuck you should read [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md).
 
 
 
 ## Compiling brainfuck
 
 All of the commands below _only work_ if you've already run `just build-env`.
-
-### `just cbat {{name}}`
-
-`cbat` is short for *"compile brainfuck to all targets"* and `{{name}}` is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. The output files are written to the `./output/` directory in their relevant subdirectories.
-
-Example
-
-```sh
-> just cbat hello_world
-```
 
 ### `just carbx {{name}}`
 
@@ -60,4 +50,14 @@ Example
 ```sh
 > just carbl hello_world
 Hello world!
+```
+
+### `just cbat {{name}}`
+
+`cbat` is short for *"compile brainfuck to all targets"* and `{{name}}` is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. The output files are written to the `./output/` directory in their relevant subdirectories.
+
+Example
+
+```sh
+> just cbat hello_world
 ```

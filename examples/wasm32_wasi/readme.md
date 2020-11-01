@@ -1,6 +1,6 @@
 # Small WebAssembly examples
 
-This directory contains a bunch of small WebAssembly example programs, including all the ones used in [Learn Assembly with Entirely Too Many Brainfuck Compilers]().
+This directory contains a bunch of small WebAssembly example programs, including all the ones used in [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md).
 
 ## Running examples
 
