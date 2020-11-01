@@ -45,7 +45,7 @@ const ASM: [&str; 11] = [
 ",
     // , // 6
     "    %char.{{CHAR}} = call i8 @getchar()
-    %bool.{{BOOL}} = icmp eq i8 255, %char.{{CHAR}}
+    %bool.{{BOOL}} = icmp eq i8 -1, %char.{{CHAR}}
     %char.{{CHAR+1}} = select i1 %bool.{{BOOL}}, i8 0, i8 %char.{{CHAR}}
     store i8 %char.{{CHAR+1}}, i8* %ptr.{{PTR}}
     ",
