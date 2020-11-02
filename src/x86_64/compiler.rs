@@ -9,33 +9,41 @@ const BOILERPLATE: &str = include_str!("boilerplate.s");
 fn inst_to_asm(idx: usize, inst: &Inst) -> String {
     match inst {
         Inst::IncPtr(n) => {
-            format!("add r12, {}\n", n)
+            format!("
+                add r12, {}
+            ", n)
         },
         Inst::DecPtr(n) => {
-            format!("sub r12, {}\n", n)
+            format!("
+                sub r12, {}
+            ", n)
         },
         Inst::IncByte(n) => {
-            format!("addb [r12], {}\n", n)
+            format!("
+                addb [r12], {}
+            ", n)
         },
         Inst::DecByte(n) => {
-            format!("subb [r12], {}\n", n)
+            format!("
+                subb [r12], {}
+            ", n)
         },
         Inst::ReadByte(n) => {
             "
-            mov rax, SYS_READ
-            mov rdi, STDIN
-            mov rsi, r12
-            mov rdx, 1
-            syscall
+                mov rax, SYS_READ
+                mov rdi, STDIN
+                mov rsi, r12
+                mov rdx, 1
+                syscall
             ".repeat(*n)
         },
         Inst::WriteByte(n) => {
             "
-            mov rax, SYS_WRITE
-            mov rdi, STDOUT
-            mov rsi, r12
-            mov rdx, 1
-            syscall
+                mov rax, SYS_WRITE
+                mov rdi, STDOUT
+                mov rsi, r12
+                mov rdx, 1
+                syscall
             ".repeat(*n)
         },
         Inst::LoopStart(_, goto) => {

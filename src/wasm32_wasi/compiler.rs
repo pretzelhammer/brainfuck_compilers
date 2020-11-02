@@ -6,128 +6,104 @@ use brainfuck_compilers::{ parse, Inst };
 
 const BOILERPLATE: &str = include_str!("boilerplate.wat");
 
-const ASM: [&str; 10] = [
-    // >
-    "
-        local.get $ptr
-        i32.const {{N}}
-        i32.add
-        local.set $ptr
-    ",
-    // <
-    "
-        local.get $ptr
-        i32.const {{N}}
-        i32.sub
-        local.set $ptr
-    ",
-    // +
-    "
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const {{N}}
-        i32.add
-        i32.store8
-    ",
-    // -
-    "
-        local.get $ptr
-        local.get $ptr
-        i32.load8_u
-        i32.const {{N}}
-        i32.sub
-        i32.store8
-    ",
-    // update iovec, before calls to , and .
-    "
-        i32.const 30004
-        local.get $ptr
-        i32.store",
-    // ,
-    "
-        i32.const 0
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_read
-        drop
-    ",
-    // .
-    "
-        i32.const 1
-        i32.const 30004
-        i32.const 1
-        i32.const 30012
-        call $fd_write
-        drop
-    ",
-    // [
-    "
-        block
-        local.get $ptr
-        i32.load8_u
-        i32.eqz
-        br_if 0
-        loop
-    ",
-    // ]
-    "
-        local.get $ptr
-        i32.load8_u
-        br_if 0
-",
-    // close blocks and loops
-"        end
-        end
-",
-];
-
-
 fn inst_to_asm(inst: &Inst, terminate_loops: usize) -> String {
     match inst {
         Inst::IncPtr(n) => {
-            ASM[0].replace("{{N}}", &n.to_string())
+            format!("
+                local.get $ptr
+                i32.const {}
+                i32.add
+                local.set $ptr
+            ", n)
         },
         Inst::DecPtr(n) => {
-            ASM[1].replace("{{N}}", &n.to_string())
+            format!("
+                local.get $ptr
+                i32.const {}
+                i32.sub
+                local.set $ptr
+            ", n)
         },
         Inst::IncByte(n) => {
-            ASM[2].replace("{{N}}", &n.to_string())
+            format!("
+                local.get $ptr
+                local.get $ptr
+                i32.load8_u
+                i32.const {}
+                i32.add
+                i32.store8
+            ", n)
         },
         Inst::DecByte(n) => {
-            ASM[3].replace("{{N}}", &n.to_string())
+            format!("
+                local.get $ptr
+                local.get $ptr
+                i32.load8_u
+                i32.const {}
+                i32.sub
+                i32.store8
+            ", n)
         },
         Inst::ReadByte(n) => {
-            let mut string = ASM[4].to_string();
-            for _ in 0..*n {
-                string.push_str(ASM[5]);
-            }
-            string
+            format!("
+                i32.const 30004
+                local.get $ptr
+                i32.store
+                {}
+            ", "
+                i32.const 0
+                i32.const 30004
+                i32.const 1
+                i32.const 30012
+                call $fd_read
+                drop
+            ".repeat(*n))
         },
         Inst::WriteByte(n) => {
-            let mut string = ASM[4].to_string();
-            for _ in 0..*n {
-                string.push_str(ASM[6]);
-            }
-            string
+            format!("
+                i32.const 30004
+                local.get $ptr
+                i32.store
+                {}
+            ", "
+                i32.const 1
+                i32.const 30004
+                i32.const 1
+                i32.const 30012
+                call $fd_write
+                drop
+            ".repeat(*n))
         },
         Inst::LoopStart(_, _) => {
-            ASM[7].to_string()
+            "
+                block
+                local.get $ptr
+                i32.load8_u
+                i32.eqz
+                br_if 0
+                loop
+            ".to_string()
         },
         Inst::LoopEnd(_, _) => {
-            let mut string = ASM[8].to_string();
-            for _ in 0..terminate_loops {
-                string.push_str(ASM[9]);
-            }
-            string
+            format!("
+                local.get $ptr
+                i32.load8_u
+                br_if 0
+                {}
+            ", "
+                end
+                end
+            ".repeat(terminate_loops))
         },
     }
 }
 
 fn write_inst_to_asm<W: Write>(instructions: &[Inst], output: &mut W) -> Result<(), Box<dyn std::error::Error>> {
     for (idx, inst) in instructions.iter().enumerate() {
-        // lmao
+        // because WASM doesn't support GOTO control flow we have
+        // to calculate how deeply nested the current LoopEnd is and
+        // how many LoopStarts it terminates (as "block" and "loop"
+        // instructions must be terminated with "end" instructions)
         let terminate_loops = {
             let mut starts = 0;
             match inst {
@@ -167,6 +143,7 @@ fn write_inst_to_asm<W: Write>(instructions: &[Inst], output: &mut W) -> Result<
             }
             starts
         };
+
         output.write(inst_to_asm(inst, terminate_loops).as_bytes())?;
     }
     
