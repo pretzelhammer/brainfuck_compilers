@@ -1,6 +1,6 @@
 # Small aarch64 examples
 
-This directory contains a bunch of small aarch64 example programs, including all the ones used in [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md).
+This directory contains a bunch of small aarch64 example programs. If you'd like to learn more about aarch64 you should read the [Intro to ARM](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md#intro-to-arm) section of [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md).
 
 ## Running examples
 

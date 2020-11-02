@@ -1,6 +1,6 @@
 # Small LLVM IR examples
 
-This directory contains a bunch of small LLVM IR example programs, including all the ones used in [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md).
+This directory contains a bunch of small LLVM IR example programs. If you'd like to learn more about LLVM IR you should read the [Intro to LLVM](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md#intro-to-llvm) section of [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md).
 
 ## Running examples
 

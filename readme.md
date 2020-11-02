@@ -1,6 +1,6 @@
 # Learn Assembly with Entirely Too Many Brainfuck Compilers
 
-This is the companion code repository for the article [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md).
+This is the companion code repository for the article [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md). The code is 100% safe Rust and dependency-free.
 
 
 
