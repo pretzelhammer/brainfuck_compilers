@@ -6,82 +6,51 @@ use brainfuck_compilers::{ parse, Inst };
 
 const BOILERPLATE: &str = include_str!("boilerplate.s");
 
-const ASM: [&str; 8] = [
-    // >
-    "
-    add r12, {{N}}
-    ",
-    // <
-    "
-    sub r12, {{N}}
-    ",
-    // +
-    "
-    addb [r12], {{N}}
-    ",
-    // -
-    "
-    subb [r12], {{N}}
-    ",
-    // ,
-    "
-    mov rax, SYS_READ
-    mov rdi, STDIN
-    mov rsi, r12
-    mov rdx, 1
-    syscall
-    ",
-    // .
-    "
-    mov rax, SYS_WRITE
-    mov rdi, STDOUT
-    mov rsi, r12
-    mov rdx, 1
-    syscall
-    ",
-    // [
-    "
-    cmpb [r12], 0
-    je LOOP_END_{{END}}
-LOOP_START_{{START}}:
-    ",
-    // ]
-    "
-    cmpb [r12], 0
-    jne LOOP_START_{{START}}
-LOOP_END_{{END}}:
-    ",
-];
-
 fn inst_to_asm(idx: usize, inst: &Inst) -> String {
     match inst {
         Inst::IncPtr(n) => {
-            ASM[0].replace("{{N}}", &n.to_string())
+            format!("add r12, {}\n", n)
         },
         Inst::DecPtr(n) => {
-            ASM[1].replace("{{N}}", &n.to_string())
+            format!("sub r12, {}\n", n)
         },
         Inst::IncByte(n) => {
-            ASM[2].replace("{{N}}", &n.to_string())
+            format!("addb [r12], {}\n", n)
         },
         Inst::DecByte(n) => {
-            ASM[3].replace("{{N}}", &n.to_string())
+            format!("subb [r12], {}\n", n)
         },
         Inst::ReadByte(n) => {
-            ASM[4].repeat(*n)
+            "
+            mov rax, SYS_READ
+            mov rdi, STDIN
+            mov rsi, r12
+            mov rdx, 1
+            syscall
+            ".repeat(*n)
         },
         Inst::WriteByte(n) => {
-            ASM[5].repeat(*n)
+            "
+            mov rax, SYS_WRITE
+            mov rdi, STDOUT
+            mov rsi, r12
+            mov rdx, 1
+            syscall
+            ".repeat(*n)
         },
         Inst::LoopStart(_, goto) => {
-            ASM[6]
-                .replace("{{START}}", &idx.to_string())
-                .replace("{{END}}", &(goto-1).to_string())
+            format!("
+                cmpb [r12], 0
+                je LOOP_END_{}
+                LOOP_START_{}:
+            ", goto - 1, idx)
         },
         Inst::LoopEnd(_, goto) => {
-            ASM[7]
-                .replace("{{END}}", &idx.to_string())
-                .replace("{{START}}", &(goto-1).to_string())  
+            format!("
+                cmpb [r12], 0
+                jne LOOP_START_{}
+                LOOP_END_{}:
+            ", goto - 1, idx)
         },
     }
 }

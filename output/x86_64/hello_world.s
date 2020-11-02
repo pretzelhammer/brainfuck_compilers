@@ -27,21 +27,13 @@ _start:
     cmpb [r12], 0
     je LOOP_END_12
 LOOP_START_1:
-    
     add r12, 1
-    
     addb [r12], 7
-    
     add r12, 1
-    
     addb [r12], 10
-    
     add r12, 1
-    
     addb [r12], 3
-    
     add r12, 1
-    
     addb [r12], 1
     
     sub r12, 4
@@ -51,9 +43,7 @@ LOOP_START_1:
     cmpb [r12], 0
     jne LOOP_START_1
 LOOP_END_12:
-    
     add r12, 1
-    
     addb [r12], 2
     
     mov rax, SYS_WRITE
@@ -61,9 +51,7 @@ LOOP_END_12:
     mov rsi, r12
     mov rdx, 1
     syscall
-    
     add r12, 1
-    
     addb [r12], 1
     
     mov rax, SYS_WRITE
@@ -93,9 +81,7 @@ LOOP_END_12:
     mov rsi, r12
     mov rdx, 1
     syscall
-    
     add r12, 1
-    
     addb [r12], 2
     
     mov rax, SYS_WRITE
@@ -113,9 +99,7 @@ LOOP_END_12:
     mov rsi, r12
     mov rdx, 1
     syscall
-    
     add r12, 1
-    
     mov rax, SYS_WRITE
     mov rdi, STDOUT
     mov rsi, r12
@@ -145,9 +129,7 @@ LOOP_END_12:
     mov rsi, r12
     mov rdx, 1
     syscall
-    
     add r12, 1
-    
     addb [r12], 1
     
     mov rax, SYS_WRITE
@@ -155,9 +137,7 @@ LOOP_END_12:
     mov rsi, r12
     mov rdx, 1
     syscall
-    
     add r12, 1
-    
     mov rax, SYS_WRITE
     mov rdi, STDOUT
     mov rsi, r12

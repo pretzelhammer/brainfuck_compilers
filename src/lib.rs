@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use std::fmt;
 
 const INC_PTR: char = '>';
@@ -151,6 +153,8 @@ pub fn parse(src: &str) -> Result<Vec<Inst>, Error> {
         match curr_inst {
             Inst::LoopStart(n, _) => {
                 let mut mut_n = *n;
+
+                // match outermost closing bracket / LoopEnd
                 for j in i+1..instructions.len() {
                     let next_inst = &instructions[j];
                     match next_inst {
@@ -169,7 +173,9 @@ pub fn parse(src: &str) -> Result<Vec<Inst>, Error> {
                 }
             },
             Inst::LoopEnd(_, _) => {
-                let mut mut_n = 0; //*n;
+                let mut mut_n = 0;
+
+                // match inner most opening bracket / LoopStart
                 for j in (0..i).rev() {
                     let prev_inst = &instructions[j];
                     match prev_inst {

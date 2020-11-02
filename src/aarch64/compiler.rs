@@ -6,89 +6,61 @@ use brainfuck_compilers::{ parse, Inst };
 
 const BOILERPLATE: &str = include_str!("boilerplate.s");
 
-const ASM: [&str; 8] = [
-    // >
-    "
-    add x19, x19, {{N}}
-    ",
-    // <
-    "
-    sub x19, x19, {{N}}
-    ",
-    // +
-    "
-    ldrb w20, [x19]
-    add w20, w20, {{N}}
-    strb w20, [x19]
-    ",
-    // -
-    "
-    ldrb w20, [x19]
-    sub w20, w20, {{N}}
-    strb w20, [x19]
-    ",
-    // ,
-    "
-    mov x8, SYS_READ
-    mov x0, STDIN
-    mov x1, x19
-    mov x2, 1
-    svc 0
-    ",
-    // .
-    "
-    mov x8, SYS_WRITE
-    mov x0, STDOUT
-    mov x1, x19
-    mov x2, 1
-    svc 0
-    ",
-    // [
-    "
-    ldrb w20, [x19]
-    cmp w20, 0
-    b.eq LOOP_END_{{END}}
-LOOP_START_{{START}}:
-    ",
-    // ]
-    "
-    ldrb w20, [x19]
-    cmp w20, 0
-    b.ne LOOP_START_{{START}}
-LOOP_END_{{END}}:
-    ",
-];
-
-
 fn inst_to_asm(idx: usize, inst: &Inst) -> String {
     match inst {
         Inst::IncPtr(n) => {
-            ASM[0].replace("{{N}}", &n.to_string())
+            format!("add x19, x19, {}", n)
         },
         Inst::DecPtr(n) => {
-            ASM[1].replace("{{N}}", &n.to_string())
+            format!("sub x19, x19, {}", n)
         },
         Inst::IncByte(n) => {
-            ASM[2].replace("{{N}}", &n.to_string())
+            format!("
+                ldrb w20, [x19]
+                add w20, w20, {}
+                strb w20, [x19]
+            ", n)
         },
         Inst::DecByte(n) => {
-            ASM[3].replace("{{N}}", &n.to_string())
+            format!("
+                ldrb w20, [x19]
+                sub w20, w20, {}
+                strb w20, [x19]
+            ", n)
         },
         Inst::ReadByte(n) => {
-            ASM[4].repeat(*n)
+            "
+            mov x8, SYS_READ
+            mov x0, STDIN
+            mov x1, x19
+            mov x2, 1
+            svc 0
+            ".repeat(*n)
         },
         Inst::WriteByte(n) => {
-            ASM[5].repeat(*n)
+           "
+           mov x8, SYS_WRITE
+           mov x0, STDOUT
+           mov x1, x19
+           mov x2, 1
+           svc 0
+           ".repeat(*n)
         },
         Inst::LoopStart(_, goto) => {
-            ASM[6]
-                .replace("{{START}}", &idx.to_string())
-                .replace("{{END}}", &(goto-1).to_string())
+            format!("
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_{}
+                LOOP_START_{}:
+            ", goto - 1, idx)
         },
         Inst::LoopEnd(_, goto) => {
-            ASM[7]
-                .replace("{{END}}", &idx.to_string())
-                .replace("{{START}}", &(goto-1).to_string())  
+            format!("
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_{}
+                LOOP_END_{}:
+            ", goto - 1, idx)
         },
     }
 }
