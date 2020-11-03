@@ -26,7 +26,7 @@ _start:
 
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_4
+                b.eq LOOP_END_13
                 LOOP_START_0:
             
                 mov x8, SYS_WRITE
@@ -52,9 +52,79 @@ _start:
                 svc 0
             
                 ldrb w20, [x19]
+                sub w20, w20, 2
+                strb w20, [x19]
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                mov x8, SYS_READ
+                mov x0, STDIN
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                ldrb w20, [x19]
+                sub w20, w20, 2
+                strb w20, [x19]
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                add x19, x19, 1
+            
+                mov x8, SYS_READ
+                mov x0, STDIN
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                mov x8, SYS_READ
+                mov x0, STDIN
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                mov x8, SYS_READ
+                mov x0, STDIN
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_0
-                LOOP_END_4:
+                LOOP_END_13:
             
                 ldrb w20, [x19]
                 add w20, w20, 3
@@ -104,8 +174,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_630
-                LOOP_START_20:
+                b.eq LOOP_END_639
+                LOOP_START_29:
             
                 sub x19, x19, 1
             
@@ -115,8 +185,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_98
-                LOOP_START_23:
+                b.eq LOOP_END_107
+                LOOP_START_32:
             
                 sub x19, x19, 2
             
@@ -126,8 +196,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_91
-                LOOP_START_26:
+                b.eq LOOP_END_100
+                LOOP_START_35:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -135,8 +205,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_33
-                LOOP_START_28:
+                b.eq LOOP_END_42
+                LOOP_START_37:
             
                 sub x19, x19, 2
             
@@ -152,8 +222,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_28
-                LOOP_END_33:
+                b.ne LOOP_START_37
+                LOOP_END_42:
             
                 add x19, x19, 2
             
@@ -163,8 +233,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_43
-                LOOP_START_36:
+                b.eq LOOP_END_52
+                LOOP_START_45:
             
                 sub x19, x19, 2
             
@@ -186,15 +256,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_36
-                LOOP_END_43:
+                b.ne LOOP_START_45
+                LOOP_END_52:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_66
-                LOOP_START_45:
+                b.eq LOOP_END_75
+                LOOP_START_54:
             
                 add x19, x19, 1
             
@@ -206,8 +276,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_51
-                LOOP_START_49:
+                b.eq LOOP_END_60
+                LOOP_START_58:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -215,8 +285,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_49
-                LOOP_END_51:
+                b.ne LOOP_START_58
+                LOOP_END_60:
             
                 ldrb w20, [x19]
                 sub w20, w20, 2
@@ -236,8 +306,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_66
-                LOOP_START_57:
+                b.eq LOOP_END_75
+                LOOP_START_66:
             
                 add x19, x19, 1
             
@@ -265,8 +335,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_57
-                LOOP_END_66:
+                b.ne LOOP_START_66
+                LOOP_END_75:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -280,8 +350,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_75
-                LOOP_START_70:
+                b.eq LOOP_END_84
+                LOOP_START_79:
             
                 sub x19, x19, 1
             
@@ -297,8 +367,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_70
-                LOOP_END_75:
+                b.ne LOOP_START_79
+                LOOP_END_84:
             
                 add x19, x19, 4
             
@@ -308,8 +378,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_83
-                LOOP_START_78:
+                b.eq LOOP_END_92
+                LOOP_START_87:
             
                 sub x19, x19, 2
             
@@ -325,8 +395,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_78
-                LOOP_END_83:
+                b.ne LOOP_START_87
+                LOOP_END_92:
             
                 sub x19, x19, 2
             
@@ -342,8 +412,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_89
-                LOOP_START_87:
+                b.eq LOOP_END_98
+                LOOP_START_96:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -351,15 +421,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_87
-                LOOP_END_89:
+                b.ne LOOP_START_96
+                LOOP_END_98:
             
                 sub x19, x19, 6
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_26
-                LOOP_END_91:
+                b.ne LOOP_START_35
+                LOOP_END_100:
             
                 ldrb w20, [x19]
                 add w20, w20, 10
@@ -373,8 +443,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_96
-                LOOP_START_94:
+                b.eq LOOP_END_105
+                LOOP_START_103:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -382,22 +452,22 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_94
-                LOOP_END_96:
+                b.ne LOOP_START_103
+                LOOP_END_105:
             
                 add x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_23
-                LOOP_END_98:
+                b.ne LOOP_START_32
+                LOOP_END_107:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_103
-                LOOP_START_100:
+                b.eq LOOP_END_112
+                LOOP_START_109:
             
                 ldrb w20, [x19]
                 sub w20, w20, 2
@@ -407,15 +477,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_100
-                LOOP_END_103:
+                b.ne LOOP_START_109
+                LOOP_END_112:
             
                 sub x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_628
-                LOOP_START_105:
+                b.eq LOOP_END_637
+                LOOP_START_114:
             
                 add x19, x19, 2
             
@@ -425,8 +495,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_628
-                LOOP_START_108:
+                b.eq LOOP_END_637
+                LOOP_START_117:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -434,8 +504,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_456
-                LOOP_START_110:
+                b.eq LOOP_END_465
+                LOOP_START_119:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -443,8 +513,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_375
-                LOOP_START_112:
+                b.eq LOOP_END_384
+                LOOP_START_121:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -452,8 +522,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_321
-                LOOP_START_114:
+                b.eq LOOP_END_330
+                LOOP_START_123:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -461,8 +531,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_239
-                LOOP_START_116:
+                b.eq LOOP_END_248
+                LOOP_START_125:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -470,8 +540,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_178
-                LOOP_START_118:
+                b.eq LOOP_END_187
+                LOOP_START_127:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -479,8 +549,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_125
-                LOOP_START_120:
+                b.eq LOOP_END_134
+                LOOP_START_129:
             
                 add x19, x19, 1
             
@@ -496,22 +566,22 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_120
-                LOOP_END_125:
+                b.ne LOOP_START_129
+                LOOP_END_134:
             
                 sub x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_169
-                LOOP_START_127:
+                b.eq LOOP_END_178
+                LOOP_START_136:
             
                 add x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_131
-                LOOP_START_129:
+                b.eq LOOP_END_140
+                LOOP_START_138:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -519,8 +589,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_129
-                LOOP_END_131:
+                b.ne LOOP_START_138
+                LOOP_END_140:
             
                 add x19, x19, 1
             
@@ -530,8 +600,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_143
-                LOOP_START_134:
+                b.eq LOOP_END_152
+                LOOP_START_143:
             
                 sub x19, x19, 2
             
@@ -559,8 +629,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_134
-                LOOP_END_143:
+                b.ne LOOP_START_143
+                LOOP_END_152:
             
                 sub x19, x19, 1
             
@@ -588,8 +658,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_155
-                LOOP_START_150:
+                b.eq LOOP_END_164
+                LOOP_START_159:
             
                 add x19, x19, 1
             
@@ -605,15 +675,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_150
-                LOOP_END_155:
+                b.ne LOOP_START_159
+                LOOP_END_164:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_167
-                LOOP_START_157:
+                b.eq LOOP_END_176
+                LOOP_START_166:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -629,8 +699,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_165
-                LOOP_START_162:
+                b.eq LOOP_END_174
+                LOOP_START_171:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -640,22 +710,22 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_162
-                LOOP_END_165:
+                b.ne LOOP_START_171
+                LOOP_END_174:
             
                 sub x19, x19, 3
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_157
-                LOOP_END_167:
+                b.ne LOOP_START_166
+                LOOP_END_176:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_127
-                LOOP_END_169:
+                b.ne LOOP_START_136
+                LOOP_END_178:
             
                 add x19, x19, 1
             
@@ -679,8 +749,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_178
-                LOOP_START_176:
+                b.eq LOOP_END_187
+                LOOP_START_185:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -688,15 +758,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_176
-                LOOP_END_178:
+                b.ne LOOP_START_185
+                LOOP_END_187:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_237
-                LOOP_START_180:
+                b.eq LOOP_END_246
+                LOOP_START_189:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -704,84 +774,84 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_193
-                LOOP_START_182:
+                b.eq LOOP_END_202
+                LOOP_START_191:
             
                 sub x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_182
-                LOOP_END_184:
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_188
-                LOOP_START_186:
-            
-                add x19, x19, 2
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_186
-                LOOP_END_188:
-            
-                sub x19, x19, 1
-            
-                ldrb w20, [x19]
-                add w20, w20, 1
-                strb w20, [x19]
-            
-                sub x19, x19, 1
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_182
+                b.ne LOOP_START_191
                 LOOP_END_193:
             
-                add x19, x19, 1
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_199
-                LOOP_START_195:
-            
                 ldrb w20, [x19]
                 sub w20, w20, 1
                 strb w20, [x19]
             
-                sub x19, x19, 1
-            
                 ldrb w20, [x19]
-                add w20, w20, 1
-                strb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_197
+                LOOP_START_195:
+            
+                add x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_195
-                LOOP_END_199:
+                LOOP_END_197:
+            
+                sub x19, x19, 1
+            
+                ldrb w20, [x19]
+                add w20, w20, 1
+                strb w20, [x19]
+            
+                sub x19, x19, 1
+            
+                ldrb w20, [x19]
+                sub w20, w20, 1
+                strb w20, [x19]
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_191
+                LOOP_END_202:
+            
+                add x19, x19, 1
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_208
+                LOOP_START_204:
+            
+                ldrb w20, [x19]
+                sub w20, w20, 1
+                strb w20, [x19]
+            
+                sub x19, x19, 1
+            
+                ldrb w20, [x19]
+                add w20, w20, 1
+                strb w20, [x19]
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_204
+                LOOP_END_208:
             
                 sub x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_203
-                LOOP_START_201:
+                b.eq LOOP_END_212
+                LOOP_START_210:
             
                 sub x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_201
-                LOOP_END_203:
+                b.ne LOOP_START_210
+                LOOP_END_212:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -791,15 +861,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_220
-                LOOP_START_206:
+                b.eq LOOP_END_229
+                LOOP_START_215:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_211
-                LOOP_START_208:
+                b.eq LOOP_END_220
+                LOOP_START_217:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -809,43 +879,43 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_208
-                LOOP_END_211:
-            
-                add x19, x19, 1
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_215
-                LOOP_START_213:
-            
-                add x19, x19, 1
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_213
-                LOOP_END_215:
-            
-                ldrb w20, [x19]
-                add w20, w20, 1
-                strb w20, [x19]
-            
-                add x19, x19, 1
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_220
-                LOOP_START_218:
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_218
+                b.ne LOOP_START_217
                 LOOP_END_220:
             
+                add x19, x19, 1
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_224
+                LOOP_START_222:
+            
+                add x19, x19, 1
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_222
+                LOOP_END_224:
+            
+                ldrb w20, [x19]
+                add w20, w20, 1
+                strb w20, [x19]
+            
+                add x19, x19, 1
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_229
+                LOOP_START_227:
+            
+                ldrb w20, [x19]
+                sub w20, w20, 1
+                strb w20, [x19]
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_227
+                LOOP_END_229:
+            
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
@@ -854,8 +924,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_237
-                LOOP_START_223:
+                b.eq LOOP_END_246
+                LOOP_START_232:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -865,8 +935,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_223
-                LOOP_END_226:
+                b.ne LOOP_START_232
+                LOOP_END_235:
             
                 sub x19, x19, 1
             
@@ -878,15 +948,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_232
-                LOOP_START_230:
+                b.eq LOOP_END_241
+                LOOP_START_239:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_230
-                LOOP_END_232:
+                b.ne LOOP_START_239
+                LOOP_END_241:
             
                 ldrb w20, [x19]
                 add w20, w20, 4
@@ -902,22 +972,22 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_223
-                LOOP_END_237:
+                b.ne LOOP_START_232
+                LOOP_END_246:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_116
-                LOOP_END_239:
+                b.ne LOOP_START_125
+                LOOP_END_248:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_319
-                LOOP_START_241:
+                b.eq LOOP_END_328
+                LOOP_START_250:
             
                 add x19, x19, 1
             
@@ -927,8 +997,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_248
-                LOOP_START_244:
+                b.eq LOOP_END_257
+                LOOP_START_253:
             
                 ldrb w20, [x19]
                 sub w20, w20, 3
@@ -942,8 +1012,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_244
-                LOOP_END_248:
+                b.ne LOOP_START_253
+                LOOP_END_257:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -957,8 +1027,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_275
-                LOOP_START_252:
+                b.eq LOOP_END_284
+                LOOP_START_261:
             
                 ldrb w20, [x19]
                 add w20, w20, 3
@@ -968,8 +1038,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_259
-                LOOP_START_255:
+                b.eq LOOP_END_268
+                LOOP_START_264:
             
                 ldrb w20, [x19]
                 sub w20, w20, 4
@@ -983,36 +1053,36 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_255
-                LOOP_END_259:
+                b.ne LOOP_START_264
+                LOOP_END_268:
             
                 sub x19, x19, 6
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_263
-                LOOP_START_261:
+                b.eq LOOP_END_272
+                LOOP_START_270:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_261
-                LOOP_END_263:
+                b.ne LOOP_START_270
+                LOOP_END_272:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_275
-                LOOP_START_265:
+                b.eq LOOP_END_284
+                LOOP_START_274:
             
                 sub x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_269
-                LOOP_START_267:
+                b.eq LOOP_END_278
+                LOOP_START_276:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1020,36 +1090,36 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_267
-                LOOP_END_269:
+                b.ne LOOP_START_276
+                LOOP_END_278:
             
                 add x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_273
-                LOOP_START_271:
+                b.eq LOOP_END_282
+                LOOP_START_280:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_271
-                LOOP_END_273:
+                b.ne LOOP_START_280
+                LOOP_END_282:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_265
-                LOOP_END_275:
+                b.ne LOOP_START_274
+                LOOP_END_284:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_313
-                LOOP_START_277:
+                b.eq LOOP_END_322
+                LOOP_START_286:
             
                 sub x19, x19, 1
             
@@ -1061,8 +1131,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_285
-                LOOP_START_281:
+                b.eq LOOP_END_294
+                LOOP_START_290:
             
                 ldrb w20, [x19]
                 sub w20, w20, 4
@@ -1076,43 +1146,43 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_281
-                LOOP_END_285:
+                b.ne LOOP_START_290
+                LOOP_END_294:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_289
-                LOOP_START_287:
+                b.eq LOOP_END_298
+                LOOP_START_296:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_287
-                LOOP_END_289:
+                b.ne LOOP_START_296
+                LOOP_END_298:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_304
-                LOOP_START_291:
+                b.eq LOOP_END_313
+                LOOP_START_300:
             
                 add x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_295
-                LOOP_START_293:
+                b.eq LOOP_END_304
+                LOOP_START_302:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_293
-                LOOP_END_295:
+                b.ne LOOP_START_302
+                LOOP_END_304:
             
                 ldrb w20, [x19]
                 add w20, w20, 3
@@ -1140,22 +1210,22 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_291
-                LOOP_END_304:
+                b.ne LOOP_START_300
+                LOOP_END_313:
             
                 add x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_311
-                LOOP_START_306:
+                b.eq LOOP_END_320
+                LOOP_START_315:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_306
-                LOOP_END_308:
+                b.ne LOOP_START_315
+                LOOP_END_317:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1165,15 +1235,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_306
-                LOOP_END_311:
+                b.ne LOOP_START_315
+                LOOP_END_320:
             
                 sub x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_277
-                LOOP_END_313:
+                b.ne LOOP_START_286
+                LOOP_END_322:
             
                 sub x19, x19, 2
             
@@ -1191,22 +1261,22 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_241
-                LOOP_END_319:
+                b.ne LOOP_START_250
+                LOOP_END_328:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_114
-                LOOP_END_321:
+                b.ne LOOP_START_123
+                LOOP_END_330:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_373
-                LOOP_START_323:
+                b.eq LOOP_END_382
+                LOOP_START_332:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1214,8 +1284,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_344
-                LOOP_START_325:
+                b.eq LOOP_END_353
+                LOOP_START_334:
             
                 add x19, x19, 1
             
@@ -1237,15 +1307,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_325
-                LOOP_END_332:
+                b.ne LOOP_START_334
+                LOOP_END_341:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_339
-                LOOP_START_334:
+                b.eq LOOP_END_348
+                LOOP_START_343:
             
                 sub x19, x19, 1
             
@@ -1261,8 +1331,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_334
-                LOOP_END_339:
+                b.ne LOOP_START_343
+                LOOP_END_348:
             
                 ldrb w20, [x19]
                 add w20, w20, 3
@@ -1278,15 +1348,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_325
-                LOOP_END_344:
+                b.ne LOOP_START_334
+                LOOP_END_353:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_373
-                LOOP_START_346:
+                b.eq LOOP_END_382
+                LOOP_START_355:
             
                 sub x19, x19, 2
             
@@ -1296,8 +1366,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_357
-                LOOP_START_349:
+                b.eq LOOP_END_366
+                LOOP_START_358:
             
                 ldrb w20, [x19]
                 sub w20, w20, 2
@@ -1307,8 +1377,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_354
-                LOOP_START_352:
+                b.eq LOOP_END_363
+                LOOP_START_361:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1316,8 +1386,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_352
-                LOOP_END_354:
+                b.ne LOOP_START_361
+                LOOP_END_363:
             
                 ldrb w20, [x19]
                 add w20, w20, 2
@@ -1327,15 +1397,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_349
-                LOOP_END_357:
+                b.ne LOOP_START_358
+                LOOP_END_366:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_371
-                LOOP_START_359:
+                b.eq LOOP_END_380
+                LOOP_START_368:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1343,8 +1413,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_359
-                LOOP_END_361:
+                b.ne LOOP_START_368
+                LOOP_END_370:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -1354,8 +1424,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_369
-                LOOP_START_364:
+                b.eq LOOP_END_378
+                LOOP_START_373:
             
                 sub x19, x19, 2
             
@@ -1371,36 +1441,36 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_364
-                LOOP_END_369:
+                b.ne LOOP_START_373
+                LOOP_END_378:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_359
-                LOOP_END_371:
+                b.ne LOOP_START_368
+                LOOP_END_380:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_346
-                LOOP_END_373:
+                b.ne LOOP_START_355
+                LOOP_END_382:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_112
-                LOOP_END_375:
+                b.ne LOOP_START_121
+                LOOP_END_384:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_454
-                LOOP_START_377:
+                b.eq LOOP_END_463
+                LOOP_START_386:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1408,8 +1478,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_433
-                LOOP_START_379:
+                b.eq LOOP_END_442
+                LOOP_START_388:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1417,8 +1487,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_403
-                LOOP_START_381:
+                b.eq LOOP_END_412
+                LOOP_START_390:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1428,8 +1498,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_386
-                LOOP_START_384:
+                b.eq LOOP_END_395
+                LOOP_START_393:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1437,8 +1507,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_384
-                LOOP_END_386:
+                b.ne LOOP_START_393
+                LOOP_END_395:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -1448,8 +1518,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_391
-                LOOP_START_389:
+                b.eq LOOP_END_400
+                LOOP_START_398:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1457,15 +1527,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_389
-                LOOP_END_391:
+                b.ne LOOP_START_398
+                LOOP_END_400:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_400
-                LOOP_START_393:
+                b.eq LOOP_END_409
+                LOOP_START_402:
             
                 sub x19, x19, 1
             
@@ -1487,8 +1557,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_393
-                LOOP_END_400:
+                b.ne LOOP_START_402
+                LOOP_END_409:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -1498,15 +1568,15 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_381
-                LOOP_END_403:
+                b.ne LOOP_START_390
+                LOOP_END_412:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_433
-                LOOP_START_405:
+                b.eq LOOP_END_442
+                LOOP_START_414:
             
                 sub x19, x19, 3
             
@@ -1516,49 +1586,19 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_429
-                LOOP_START_408:
+                b.eq LOOP_END_438
+                LOOP_START_417:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
                 strb w20, [x19]
-            
-                add x19, x19, 1
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_413
-                LOOP_START_411:
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_411
-                LOOP_END_413:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.eq LOOP_END_422
-                LOOP_START_415:
-            
-                sub x19, x19, 2
-            
-                ldrb w20, [x19]
-                add w20, w20, 1
-                strb w20, [x19]
-            
-                add x19, x19, 1
-            
-                ldrb w20, [x19]
-                add w20, w20, 1
-                strb w20, [x19]
-            
-                add x19, x19, 1
+                LOOP_START_420:
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1566,23 +1606,29 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_415
+                b.ne LOOP_START_420
                 LOOP_END_422:
             
-                sub x19, x19, 2
+                add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_429
+                b.eq LOOP_END_431
                 LOOP_START_424:
             
-                add x19, x19, 2
+                sub x19, x19, 2
             
                 ldrb w20, [x19]
                 add w20, w20, 1
                 strb w20, [x19]
             
-                sub x19, x19, 2
+                add x19, x19, 1
+            
+                ldrb w20, [x19]
+                add w20, w20, 1
+                strb w20, [x19]
+            
+                add x19, x19, 1
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1591,7 +1637,31 @@ _start:
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_424
-                LOOP_END_429:
+                LOOP_END_431:
+            
+                sub x19, x19, 2
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_438
+                LOOP_START_433:
+            
+                add x19, x19, 2
+            
+                ldrb w20, [x19]
+                add w20, w20, 1
+                strb w20, [x19]
+            
+                sub x19, x19, 2
+            
+                ldrb w20, [x19]
+                sub w20, w20, 1
+                strb w20, [x19]
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_433
+                LOOP_END_438:
             
                 ldrb w20, [x19]
                 add w20, w20, 2
@@ -1599,29 +1669,29 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_433
-                LOOP_START_431:
+                b.eq LOOP_END_442
+                LOOP_START_440:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_431
-                LOOP_END_433:
+                b.ne LOOP_START_440
+                LOOP_END_442:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_451
-                LOOP_START_435:
+                b.eq LOOP_END_460
+                LOOP_START_444:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_444
-                LOOP_START_437:
+                b.eq LOOP_END_453
+                LOOP_START_446:
             
                 add x19, x19, 2
             
@@ -1636,30 +1706,6 @@ _start:
                 strb w20, [x19]
             
                 sub x19, x19, 3
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_437
-                LOOP_END_444:
-            
-                add x19, x19, 3
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_451
-                LOOP_START_446:
-            
-                sub x19, x19, 3
-            
-                ldrb w20, [x19]
-                add w20, w20, 1
-                strb w20, [x19]
-            
-                add x19, x19, 3
             
                 ldrb w20, [x19]
                 sub w20, w20, 1
@@ -1668,7 +1714,31 @@ _start:
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_446
-                LOOP_END_451:
+                LOOP_END_453:
+            
+                add x19, x19, 3
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_460
+                LOOP_START_455:
+            
+                sub x19, x19, 3
+            
+                ldrb w20, [x19]
+                add w20, w20, 1
+                strb w20, [x19]
+            
+                add x19, x19, 3
+            
+                ldrb w20, [x19]
+                sub w20, w20, 1
+                strb w20, [x19]
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_455
+                LOOP_END_460:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -1678,22 +1748,22 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_377
-                LOOP_END_454:
+                b.ne LOOP_START_386
+                LOOP_END_463:
             
                 add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_110
-                LOOP_END_456:
+                b.ne LOOP_START_119
+                LOOP_END_465:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_626
-                LOOP_START_458:
+                b.eq LOOP_END_635
+                LOOP_START_467:
             
                 ldrb w20, [x19]
                 add w20, w20, 1
@@ -1701,73 +1771,41 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_482
-                LOOP_START_460:
+                b.eq LOOP_END_491
+                LOOP_START_469:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_460
-                LOOP_END_462:
+                b.ne LOOP_START_469
+                LOOP_END_471:
             
                 sub x19, x19, 2
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_466
-                LOOP_START_464:
-            
-                sub x19, x19, 2
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_464
-                LOOP_END_466:
-            
-                sub x19, x19, 1
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
-            
-                add x19, x19, 2
-            
-                ldrb w20, [x19]
-                add w20, w20, 1
-                strb w20, [x19]
-            
-                sub x19, x19, 1
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
             
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.eq LOOP_END_475
                 LOOP_START_473:
             
-                add x19, x19, 2
+                sub x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_473
                 LOOP_END_475:
             
-                add x19, x19, 1
+                sub x19, x19, 1
             
                 ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_479
-                LOOP_START_477:
+                sub w20, w20, 1
+                strb w20, [x19]
             
-                add x19, x19, 1
+                add x19, x19, 2
             
                 ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_477
-                LOOP_END_479:
+                add w20, w20, 1
+                strb w20, [x19]
             
                 sub x19, x19, 1
             
@@ -1777,22 +1815,54 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_460
-                LOOP_END_482:
+                b.eq LOOP_END_484
+                LOOP_START_482:
+            
+                add x19, x19, 2
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_482
+                LOOP_END_484:
+            
+                add x19, x19, 1
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_488
+                LOOP_START_486:
+            
+                add x19, x19, 1
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_486
+                LOOP_END_488:
+            
+                sub x19, x19, 1
+            
+                ldrb w20, [x19]
+                sub w20, w20, 1
+                strb w20, [x19]
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_469
+                LOOP_END_491:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_486
-                LOOP_START_484:
+                b.eq LOOP_END_495
+                LOOP_START_493:
             
                 sub x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_484
-                LOOP_END_486:
+                b.ne LOOP_START_493
+                LOOP_END_495:
             
                 sub x19, x19, 2
             
@@ -1808,8 +1878,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_507
-                LOOP_START_491:
+                b.eq LOOP_END_516
+                LOOP_START_500:
             
                 add x19, x19, 1
             
@@ -1825,8 +1895,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_491
-                LOOP_END_496:
+                b.ne LOOP_START_500
+                LOOP_END_505:
             
                 ldrb w20, [x19]
                 add w20, w20, 2
@@ -1836,8 +1906,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_504
-                LOOP_START_499:
+                b.eq LOOP_END_513
+                LOOP_START_508:
             
                 sub x19, x19, 2
             
@@ -1853,8 +1923,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_499
-                LOOP_END_504:
+                b.ne LOOP_START_508
+                LOOP_END_513:
             
                 sub x19, x19, 1
             
@@ -1864,8 +1934,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_491
-                LOOP_END_507:
+                b.ne LOOP_START_500
+                LOOP_END_516:
             
                 sub x19, x19, 9
             
@@ -1887,8 +1957,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_589
-                LOOP_START_514:
+                b.eq LOOP_END_598
+                LOOP_START_523:
             
                 sub x19, x19, 4
             
@@ -1916,8 +1986,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_589
-                LOOP_START_523:
+                b.eq LOOP_END_598
+                LOOP_START_532:
             
                 sub x19, x19, 8
             
@@ -1957,8 +2027,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_589
-                LOOP_START_536:
+                b.eq LOOP_END_598
+                LOOP_START_545:
             
                 sub x19, x19, 5
             
@@ -1992,8 +2062,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_589
-                LOOP_START_547:
+                b.eq LOOP_END_598
+                LOOP_START_556:
             
                 sub x19, x19, 4
             
@@ -2027,8 +2097,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_589
-                LOOP_START_558:
+                b.eq LOOP_END_598
+                LOOP_START_567:
             
                 sub x19, x19, 7
             
@@ -2068,8 +2138,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_589
-                LOOP_START_571:
+                b.eq LOOP_END_598
+                LOOP_START_580:
             
                 sub x19, x19, 5
             
@@ -2097,8 +2167,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_589
-                LOOP_START_580:
+                b.eq LOOP_END_598
+                LOOP_START_589:
             
                 sub x19, x19, 4
             
@@ -2126,8 +2196,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_580
-                LOOP_END_589:
+                b.ne LOOP_START_589
+                LOOP_END_598:
             
                 ldrb w20, [x19]
                 add w20, w20, 3
@@ -2135,8 +2205,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_599
-                LOOP_START_591:
+                b.eq LOOP_END_608
+                LOOP_START_600:
             
                 add x19, x19, 1
             
@@ -2152,8 +2222,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_591
-                LOOP_END_596:
+                b.ne LOOP_START_600
+                LOOP_END_605:
             
                 sub x19, x19, 1
             
@@ -2163,8 +2233,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_591
-                LOOP_END_599:
+                b.ne LOOP_START_600
+                LOOP_END_608:
             
                 ldrb w20, [x19]
                 sub w20, w20, 3
@@ -2174,8 +2244,8 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_613
-                LOOP_START_602:
+                b.eq LOOP_END_622
+                LOOP_START_611:
             
                 sub x19, x19, 1
             
@@ -2187,40 +2257,7 @@ _start:
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_611
-                LOOP_START_606:
-            
-                sub x19, x19, 1
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
-            
-                add x19, x19, 1
-            
-                ldrb w20, [x19]
-                sub w20, w20, 1
-                strb w20, [x19]
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_606
-                LOOP_END_611:
-            
-                add x19, x19, 1
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_602
-                LOOP_END_613:
-            
-                ldrb w20, [x19]
-                add w20, w20, 2
-                strb w20, [x19]
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_622
+                b.eq LOOP_END_620
                 LOOP_START_615:
             
                 sub x19, x19, 1
@@ -2240,120 +2277,73 @@ _start:
                 b.ne LOOP_START_615
                 LOOP_END_620:
             
-                add x19, x19, 2
+                add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_615
+                b.ne LOOP_START_611
                 LOOP_END_622:
             
-                add x19, x19, 1
+                ldrb w20, [x19]
+                add w20, w20, 2
+                strb w20, [x19]
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.eq LOOP_END_626
+                b.eq LOOP_END_631
                 LOOP_START_624:
             
+                sub x19, x19, 1
+            
+                ldrb w20, [x19]
+                sub w20, w20, 1
+                strb w20, [x19]
+            
                 add x19, x19, 1
+            
+                ldrb w20, [x19]
+                sub w20, w20, 1
+                strb w20, [x19]
             
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_624
-                LOOP_END_626:
+                LOOP_END_629:
             
-                sub x19, x19, 1
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_108
-                LOOP_END_628:
-            
-                sub x19, x19, 1
+                add x19, x19, 2
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_20
-                LOOP_END_630:
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_641
-                LOOP_START_631:
-            
-                ldrb w20, [x19]
-                sub w20, w20, 2
-                strb w20, [x19]
-            
-                mov x8, SYS_WRITE
-                mov x0, STDOUT
-                mov x1, x19
-                mov x2, 1
-                svc 0
-            
-                mov x8, SYS_WRITE
-                mov x0, STDOUT
-                mov x1, x19
-                mov x2, 1
-                svc 0
-            
-                mov x8, SYS_READ
-                mov x0, STDIN
-                mov x1, x19
-                mov x2, 1
-                svc 0
-            
-                mov x8, SYS_WRITE
-                mov x0, STDOUT
-                mov x1, x19
-                mov x2, 1
-                svc 0
-            
-                mov x8, SYS_WRITE
-                mov x0, STDOUT
-                mov x1, x19
-                mov x2, 1
-                svc 0
-            
-                ldrb w20, [x19]
-                sub w20, w20, 2
-                strb w20, [x19]
-            
-                mov x8, SYS_WRITE
-                mov x0, STDOUT
-                mov x1, x19
-                mov x2, 1
-                svc 0
+                b.ne LOOP_START_624
+                LOOP_END_631:
             
                 add x19, x19, 1
             
-                mov x8, SYS_READ
-                mov x0, STDIN
-                mov x1, x19
-                mov x2, 1
-                svc 0
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.eq LOOP_END_635
+                LOOP_START_633:
             
-                mov x8, SYS_READ
-                mov x0, STDIN
-                mov x1, x19
-                mov x2, 1
-                svc 0
-            
-                mov x8, SYS_READ
-                mov x0, STDIN
-                mov x1, x19
-                mov x2, 1
-                svc 0
-            
-                mov x8, SYS_WRITE
-                mov x0, STDOUT
-                mov x1, x19
-                mov x2, 1
-                svc 0
+                add x19, x19, 1
             
                 ldrb w20, [x19]
                 cmp w20, 0
-                b.ne LOOP_START_631
-                LOOP_END_641:
+                b.ne LOOP_START_633
+                LOOP_END_635:
+            
+                sub x19, x19, 1
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_117
+                LOOP_END_637:
+            
+                sub x19, x19, 1
+            
+                ldrb w20, [x19]
+                cmp w20, 0
+                b.ne LOOP_START_29
+                LOOP_END_639:
             
     mov x8, SYS_EXIT
     mov x0, SUCCESS

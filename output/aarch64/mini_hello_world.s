@@ -41,7 +41,9 @@ _start:
                 cmp w20, 0
                 b.eq LOOP_END_14
                 LOOP_START_3:
-            sub x19, x19, 2
+            
+                sub x19, x19, 2
+            
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.eq LOOP_END_14
@@ -59,7 +61,9 @@ _start:
                 ldrb w20, [x19]
                 sub w20, w20, 3
                 strb w20, [x19]
-            add x19, x19, 1
+            
+                add x19, x19, 1
+            
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_7
@@ -73,12 +77,16 @@ _start:
                 cmp w20, 0
                 b.eq LOOP_END_14
                 LOOP_START_12:
-            sub x19, x19, 3
+            
+                sub x19, x19, 3
+            
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_12
                 LOOP_END_14:
-            add x19, x19, 3
+            
+                add x19, x19, 3
+            
                 ldrb w20, [x19]
                 sub w20, w20, 1
                 strb w20, [x19]
@@ -87,93 +95,111 @@ _start:
                 cmp w20, 0
                 b.ne LOOP_START_1
                 LOOP_END_17:
-            add x19, x19, 1
+            
+                add x19, x19, 1
+            
                 ldrb w20, [x19]
                 sub w20, w20, 1
                 strb w20, [x19]
             
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
                 ldrb w20, [x19]
                 sub w20, w20, 3
                 strb w20, [x19]
             
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           add x19, x19, 1
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           add x19, x19, 1
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           sub x19, x19, 4
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                add x19, x19, 1
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                add x19, x19, 1
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                sub x19, x19, 4
+            
                 ldrb w20, [x19]
                 sub w20, w20, 1
                 strb w20, [x19]
             
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           sub x19, x19, 1
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                sub x19, x19, 1
+            
                 ldrb w20, [x19]
                 add w20, w20, 1
                 strb w20, [x19]
             
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           add x19, x19, 5
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           add x19, x19, 1
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           sub x19, x19, 2
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           sub x19, x19, 1
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                add x19, x19, 5
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                add x19, x19, 1
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                sub x19, x19, 2
+            
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
+                sub x19, x19, 1
+            
                 ldrb w20, [x19]
                 sub w20, w20, 1
                 strb w20, [x19]
             
-           mov x8, SYS_WRITE
-           mov x0, STDOUT
-           mov x1, x19
-           mov x2, 1
-           svc 0
-           
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
     mov x8, SYS_EXIT
     mov x0, SUCCESS
     svc 0

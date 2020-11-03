@@ -46,6 +46,12 @@ _start:
                 mov rdx, 1
                 syscall
             
+                mov rax, SYS_WRITE
+                mov rdi, STDOUT
+                mov rsi, r12
+                mov rdx, 1
+                syscall
+            
                 cmpb [r12], 0
                 jne LOOP_START_0
                 LOOP_END_4:
@@ -113,20 +119,6 @@ _start:
                 cmpb [r12], 0
                 jne LOOP_START_8
                 LOOP_END_25:
-            
-                cmpb [r12], 0
-                je LOOP_END_28
-                LOOP_START_26:
-            
-                mov rax, SYS_WRITE
-                mov rdi, STDOUT
-                mov rsi, r12
-                mov rdx, 1
-                syscall
-            
-                cmpb [r12], 0
-                jne LOOP_START_26
-                LOOP_END_28:
             
     mov rax, SYS_EXIT
     mov rdi, SUCCESS

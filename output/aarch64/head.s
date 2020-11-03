@@ -51,6 +51,12 @@ _start:
                 mov x2, 1
                 svc 0
             
+                mov x8, SYS_WRITE
+                mov x0, STDOUT
+                mov x1, x19
+                mov x2, 1
+                svc 0
+            
                 ldrb w20, [x19]
                 cmp w20, 0
                 b.ne LOOP_START_0
@@ -140,22 +146,6 @@ _start:
                 cmp w20, 0
                 b.ne LOOP_START_8
                 LOOP_END_25:
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.eq LOOP_END_28
-                LOOP_START_26:
-            
-                mov x8, SYS_WRITE
-                mov x0, STDOUT
-                mov x1, x19
-                mov x2, 1
-                svc 0
-            
-                ldrb w20, [x19]
-                cmp w20, 0
-                b.ne LOOP_START_26
-                LOOP_END_28:
             
     mov x8, SYS_EXIT
     mov x0, SUCCESS
