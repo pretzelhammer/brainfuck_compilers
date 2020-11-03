@@ -95,14 +95,14 @@ Example
 Hello World!
 ```
 
-## `mandlebrot.b`
+## `mandelbrot.b`
 
-Mandlebrot ASCII viewer.
+Mandelbrot ASCII viewer.
 
 Example
 
 ```sh
-> just interpret mandlebrot
+> just interpret mandelbrot
 # output omitted because it's huge
 ```
 

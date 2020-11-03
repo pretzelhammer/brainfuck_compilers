@@ -154,30 +154,30 @@ Example
 Times how long it takes to interpret and run the compiled versions of `{{name}}` where name is the name of the brainfuck source file (without `.b` extension) in the `./input/` directory. If this command doesn't work for whatever reason it's because you should run `just cbat {{name}}` first.
 
 ```sh
-> just cbat mandlebrot
-> just benchmark mandlebrot
+> just cbat mandelbrot
+> just benchmark mandelbrot
 
 # program outputs omitted
 
-# interpreted mandlebrot.b
+# interpreted mandelbrot.b
 4.95s user 0.01s system 99% cpu 4.960 total
 
-# x86_64 compiled mandlebrot.b
+# x86_64 compiled mandelbrot.b
 real    0m1.214s
 user    0m1.149s
 sys     0m0.041s
 
-# aarch64 compiled mandlebrot.b
+# aarch64 compiled mandelbrot.b
 real    0m4.206s
 user    0m4.103s
 sys     0m0.083s
 
-# wasm32-wasi compiled mandlebrot.b
+# wasm32-wasi compiled mandelbrot.b
 real    0m1.480s
 user    0m1.429s
 sys     0m0.046s
 
-# llvm-ir compiled mandlebrot.b
+# llvm-ir compiled mandelbrot.b
 real    0m0.896s
 user    0m0.887s
 sys     0m0.001s
