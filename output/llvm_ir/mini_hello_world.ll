@@ -6,230 +6,240 @@ declare i8 @getchar()
 
 define i8 @main() {
 
-                %idx.10 = load i64, i64* @index
-                %ptr.10 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.10
-                %byte.10 = load i8, i8* %ptr.10
-                %byte.11 = add i8 %byte.10, 1
-                store i8 %byte.11, i8* %ptr.10
+                %idx.0 = load i64, i64* @index
+                %ptr.1 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.0
+                %byte.2 = load i8, i8* %ptr.1
+                %byte.3 = add i8 %byte.2, 1
+                store i8 %byte.3, i8* %ptr.1
             
-                %idx.20 = load i64, i64* @index
-                %ptr.20 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.20
-                %byte.20 = load i8, i8* %ptr.20
-                %bool.20 = icmp eq i8 0, %byte.20
-                br i1 %bool.20, label %LOOP_END_17, label %LOOP_START_1
+                %idx.4 = load i64, i64* @index
+                %ptr.5 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.4
+                %byte.6 = load i8, i8* %ptr.5
+                %bool.7 = icmp eq i8 0, %byte.6
+                br i1 %bool.7, label %LOOP_END_17, label %LOOP_START_1
                 LOOP_START_1:
             
-                %idx.30 = load i64, i64* @index
-                %ptr.30 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.30
-                %byte.30 = load i8, i8* %ptr.30
-                %byte.31 = sub i8 %byte.30, 1
-                store i8 %byte.31, i8* %ptr.30
+                %idx.8 = load i64, i64* @index
+                %ptr.9 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.8
+                %byte.10 = load i8, i8* %ptr.9
+                %byte.11 = sub i8 %byte.10, 1
+                store i8 %byte.11, i8* %ptr.9
             
-                %idx.40 = load i64, i64* @index
-                %ptr.40 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.40
-                %byte.40 = load i8, i8* %ptr.40
-                %bool.40 = icmp eq i8 0, %byte.40
-                br i1 %bool.40, label %LOOP_END_14, label %LOOP_START_3
+                %idx.12 = load i64, i64* @index
+                %ptr.13 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.12
+                %byte.14 = load i8, i8* %ptr.13
+                %bool.15 = icmp eq i8 0, %byte.14
+                br i1 %bool.15, label %LOOP_END_14, label %LOOP_START_3
                 LOOP_START_3:
             
-                %idx.50 = load i64, i64* @index
-                %idx.51 = sub i64 %idx.50, 2
-                store i64 %idx.51, i64* @index
+                %idx.16 = load i64, i64* @index
+                %idx.17 = sub i64 %idx.16, 2
+                store i64 %idx.17, i64* @index
             
-                %idx.60 = load i64, i64* @index
-                %ptr.60 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.60
-                %byte.60 = load i8, i8* %ptr.60
-                %bool.60 = icmp eq i8 0, %byte.60
-                br i1 %bool.60, label %LOOP_END_14, label %LOOP_START_5
+                %idx.18 = load i64, i64* @index
+                %ptr.19 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.18
+                %byte.20 = load i8, i8* %ptr.19
+                %bool.21 = icmp eq i8 0, %byte.20
+                br i1 %bool.21, label %LOOP_END_14, label %LOOP_START_5
                 LOOP_START_5:
             
-                %idx.70 = load i64, i64* @index
-                %ptr.70 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.70
-                %byte.70 = load i8, i8* %ptr.70
-                %byte.71 = add i8 %byte.70, 1
-                store i8 %byte.71, i8* %ptr.70
+                %idx.22 = load i64, i64* @index
+                %ptr.23 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.22
+                %byte.24 = load i8, i8* %ptr.23
+                %byte.25 = add i8 %byte.24, 1
+                store i8 %byte.25, i8* %ptr.23
             
-                %idx.80 = load i64, i64* @index
-                %ptr.80 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.80
-                %byte.80 = load i8, i8* %ptr.80
-                %bool.80 = icmp eq i8 0, %byte.80
-                br i1 %bool.80, label %LOOP_END_10, label %LOOP_START_7
+                %idx.26 = load i64, i64* @index
+                %ptr.27 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.26
+                %byte.28 = load i8, i8* %ptr.27
+                %bool.29 = icmp eq i8 0, %byte.28
+                br i1 %bool.29, label %LOOP_END_10, label %LOOP_START_7
                 LOOP_START_7:
             
-                %idx.90 = load i64, i64* @index
-                %ptr.90 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.90
-                %byte.90 = load i8, i8* %ptr.90
-                %byte.91 = sub i8 %byte.90, 3
-                store i8 %byte.91, i8* %ptr.90
+                %idx.30 = load i64, i64* @index
+                %ptr.31 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.30
+                %byte.32 = load i8, i8* %ptr.31
+                %byte.33 = sub i8 %byte.32, 3
+                store i8 %byte.33, i8* %ptr.31
             
-                %idx.100 = load i64, i64* @index
-                %idx.101 = add i64 %idx.100, 1
-                store i64 %idx.101, i64* @index
+                %idx.34 = load i64, i64* @index
+                %idx.35 = add i64 %idx.34, 1
+                store i64 %idx.35, i64* @index
             
-                %idx.110 = load i64, i64* @index
-                %ptr.110 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.110
-                %byte.110 = load i8, i8* %ptr.110
-                %bool.110 = icmp ne i8 0, %byte.110
-                br i1 %bool.110, label %LOOP_START_7, label %LOOP_END_10
+                %idx.36 = load i64, i64* @index
+                %ptr.37 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.36
+                %byte.38 = load i8, i8* %ptr.37
+                %bool.39 = icmp ne i8 0, %byte.38
+                br i1 %bool.39, label %LOOP_START_7, label %LOOP_END_10
                 LOOP_END_10:
             
-                %idx.120 = load i64, i64* @index
-                %ptr.120 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.120
-                %byte.120 = load i8, i8* %ptr.120
-                %byte.121 = sub i8 %byte.120, 1
-                store i8 %byte.121, i8* %ptr.120
+                %idx.40 = load i64, i64* @index
+                %ptr.41 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.40
+                %byte.42 = load i8, i8* %ptr.41
+                %byte.43 = sub i8 %byte.42, 1
+                store i8 %byte.43, i8* %ptr.41
             
-                %idx.130 = load i64, i64* @index
-                %ptr.130 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.130
-                %byte.130 = load i8, i8* %ptr.130
-                %bool.130 = icmp eq i8 0, %byte.130
-                br i1 %bool.130, label %LOOP_END_14, label %LOOP_START_12
+                %idx.44 = load i64, i64* @index
+                %ptr.45 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.44
+                %byte.46 = load i8, i8* %ptr.45
+                %bool.47 = icmp eq i8 0, %byte.46
+                br i1 %bool.47, label %LOOP_END_14, label %LOOP_START_12
                 LOOP_START_12:
             
-                %idx.140 = load i64, i64* @index
-                %idx.141 = sub i64 %idx.140, 3
-                store i64 %idx.141, i64* @index
+                %idx.48 = load i64, i64* @index
+                %idx.49 = sub i64 %idx.48, 3
+                store i64 %idx.49, i64* @index
             
-                %idx.150 = load i64, i64* @index
-                %ptr.150 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.150
-                %byte.150 = load i8, i8* %ptr.150
-                %bool.150 = icmp ne i8 0, %byte.150
-                br i1 %bool.150, label %LOOP_START_12, label %LOOP_END_14
+                %idx.50 = load i64, i64* @index
+                %ptr.51 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.50
+                %byte.52 = load i8, i8* %ptr.51
+                %bool.53 = icmp ne i8 0, %byte.52
+                br i1 %bool.53, label %LOOP_START_12, label %LOOP_END_14
                 LOOP_END_14:
             
-                %idx.160 = load i64, i64* @index
-                %idx.161 = add i64 %idx.160, 3
-                store i64 %idx.161, i64* @index
+                %idx.54 = load i64, i64* @index
+                %idx.55 = add i64 %idx.54, 3
+                store i64 %idx.55, i64* @index
             
-                %idx.170 = load i64, i64* @index
-                %ptr.170 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.170
-                %byte.170 = load i8, i8* %ptr.170
-                %byte.171 = sub i8 %byte.170, 1
-                store i8 %byte.171, i8* %ptr.170
+                %idx.56 = load i64, i64* @index
+                %ptr.57 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.56
+                %byte.58 = load i8, i8* %ptr.57
+                %byte.59 = sub i8 %byte.58, 1
+                store i8 %byte.59, i8* %ptr.57
             
-                %idx.180 = load i64, i64* @index
-                %ptr.180 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.180
-                %byte.180 = load i8, i8* %ptr.180
-                %bool.180 = icmp ne i8 0, %byte.180
-                br i1 %bool.180, label %LOOP_START_1, label %LOOP_END_17
+                %idx.60 = load i64, i64* @index
+                %ptr.61 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.60
+                %byte.62 = load i8, i8* %ptr.61
+                %bool.63 = icmp ne i8 0, %byte.62
+                br i1 %bool.63, label %LOOP_START_1, label %LOOP_END_17
                 LOOP_END_17:
             
-                %idx.190 = load i64, i64* @index
-                %idx.191 = add i64 %idx.190, 1
-                store i64 %idx.191, i64* @index
+                %idx.64 = load i64, i64* @index
+                %idx.65 = add i64 %idx.64, 1
+                store i64 %idx.65, i64* @index
             
-                %idx.200 = load i64, i64* @index
-                %ptr.200 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.200
-                %byte.200 = load i8, i8* %ptr.200
-                %byte.201 = sub i8 %byte.200, 1
-                store i8 %byte.201, i8* %ptr.200
+                %idx.66 = load i64, i64* @index
+                %ptr.67 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.66
+                %byte.68 = load i8, i8* %ptr.67
+                %byte.69 = sub i8 %byte.68, 1
+                store i8 %byte.69, i8* %ptr.67
             
-    %idx.210 = load i64, i64* @index
-    %ptr.210 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.210
-    %char.210 = load i8, i8* %ptr.210
-    call i8 @putchar(i8 %char.210)
+                %idx.71 = load i64, i64* @index
+                %ptr.72 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.71
+                %char.70 = load i8, i8* %ptr.72
+                call i8 @putchar(i8 %char.70)
 
-                %idx.221 = load i64, i64* @index
-                %ptr.221 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.221
-                %byte.220 = load i8, i8* %ptr.221
-                %byte.221 = sub i8 %byte.220, 3
-                store i8 %byte.221, i8* %ptr.221
             
-    %idx.231 = load i64, i64* @index
-    %ptr.231 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.231
-    %char.231 = load i8, i8* %ptr.231
-    call i8 @putchar(i8 %char.231)
+                %idx.73 = load i64, i64* @index
+                %ptr.74 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.73
+                %byte.75 = load i8, i8* %ptr.74
+                %byte.76 = sub i8 %byte.75, 3
+                store i8 %byte.76, i8* %ptr.74
+            
+                %idx.78 = load i64, i64* @index
+                %ptr.79 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.78
+                %char.77 = load i8, i8* %ptr.79
+                call i8 @putchar(i8 %char.77)
 
-                %idx.242 = load i64, i64* @index
-                %idx.243 = add i64 %idx.242, 1
-                store i64 %idx.243, i64* @index
             
-    %idx.252 = load i64, i64* @index
-    %ptr.252 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.252
-    %char.252 = load i8, i8* %ptr.252
-    call i8 @putchar(i8 %char.252)
-    call i8 @putchar(i8 %char.252)
+                %idx.80 = load i64, i64* @index
+                %idx.81 = add i64 %idx.80, 1
+                store i64 %idx.81, i64* @index
+            
+                %idx.83 = load i64, i64* @index
+                %ptr.84 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.83
+                %char.82 = load i8, i8* %ptr.84
+                call i8 @putchar(i8 %char.82)
+call i8 @putchar(i8 %char.82)
 
-                %idx.263 = load i64, i64* @index
-                %idx.264 = add i64 %idx.263, 1
-                store i64 %idx.264, i64* @index
             
-    %idx.273 = load i64, i64* @index
-    %ptr.273 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.273
-    %char.273 = load i8, i8* %ptr.273
-    call i8 @putchar(i8 %char.273)
+                %idx.85 = load i64, i64* @index
+                %idx.86 = add i64 %idx.85, 1
+                store i64 %idx.86, i64* @index
+            
+                %idx.88 = load i64, i64* @index
+                %ptr.89 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.88
+                %char.87 = load i8, i8* %ptr.89
+                call i8 @putchar(i8 %char.87)
 
-                %idx.284 = load i64, i64* @index
-                %idx.285 = sub i64 %idx.284, 4
-                store i64 %idx.285, i64* @index
             
-                %idx.294 = load i64, i64* @index
-                %ptr.294 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.294
-                %byte.290 = load i8, i8* %ptr.294
-                %byte.291 = sub i8 %byte.290, 1
-                store i8 %byte.291, i8* %ptr.294
+                %idx.90 = load i64, i64* @index
+                %idx.91 = sub i64 %idx.90, 4
+                store i64 %idx.91, i64* @index
             
-    %idx.304 = load i64, i64* @index
-    %ptr.304 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.304
-    %char.304 = load i8, i8* %ptr.304
-    call i8 @putchar(i8 %char.304)
+                %idx.92 = load i64, i64* @index
+                %ptr.93 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.92
+                %byte.94 = load i8, i8* %ptr.93
+                %byte.95 = sub i8 %byte.94, 1
+                store i8 %byte.95, i8* %ptr.93
+            
+                %idx.97 = load i64, i64* @index
+                %ptr.98 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.97
+                %char.96 = load i8, i8* %ptr.98
+                call i8 @putchar(i8 %char.96)
 
-                %idx.315 = load i64, i64* @index
-                %idx.316 = sub i64 %idx.315, 1
-                store i64 %idx.316, i64* @index
             
-                %idx.325 = load i64, i64* @index
-                %ptr.325 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.325
-                %byte.320 = load i8, i8* %ptr.325
-                %byte.321 = add i8 %byte.320, 1
-                store i8 %byte.321, i8* %ptr.325
+                %idx.99 = load i64, i64* @index
+                %idx.100 = sub i64 %idx.99, 1
+                store i64 %idx.100, i64* @index
             
-    %idx.335 = load i64, i64* @index
-    %ptr.335 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.335
-    %char.335 = load i8, i8* %ptr.335
-    call i8 @putchar(i8 %char.335)
+                %idx.101 = load i64, i64* @index
+                %ptr.102 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.101
+                %byte.103 = load i8, i8* %ptr.102
+                %byte.104 = add i8 %byte.103, 1
+                store i8 %byte.104, i8* %ptr.102
+            
+                %idx.106 = load i64, i64* @index
+                %ptr.107 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.106
+                %char.105 = load i8, i8* %ptr.107
+                call i8 @putchar(i8 %char.105)
 
-                %idx.346 = load i64, i64* @index
-                %idx.347 = add i64 %idx.346, 5
-                store i64 %idx.347, i64* @index
             
-    %idx.356 = load i64, i64* @index
-    %ptr.356 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.356
-    %char.356 = load i8, i8* %ptr.356
-    call i8 @putchar(i8 %char.356)
+                %idx.108 = load i64, i64* @index
+                %idx.109 = add i64 %idx.108, 5
+                store i64 %idx.109, i64* @index
+            
+                %idx.111 = load i64, i64* @index
+                %ptr.112 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.111
+                %char.110 = load i8, i8* %ptr.112
+                call i8 @putchar(i8 %char.110)
 
-                %idx.367 = load i64, i64* @index
-                %idx.368 = add i64 %idx.367, 1
-                store i64 %idx.368, i64* @index
             
-    %idx.377 = load i64, i64* @index
-    %ptr.377 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.377
-    %char.377 = load i8, i8* %ptr.377
-    call i8 @putchar(i8 %char.377)
+                %idx.113 = load i64, i64* @index
+                %idx.114 = add i64 %idx.113, 1
+                store i64 %idx.114, i64* @index
+            
+                %idx.116 = load i64, i64* @index
+                %ptr.117 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.116
+                %char.115 = load i8, i8* %ptr.117
+                call i8 @putchar(i8 %char.115)
 
-                %idx.388 = load i64, i64* @index
-                %idx.389 = sub i64 %idx.388, 2
-                store i64 %idx.389, i64* @index
             
-    %idx.398 = load i64, i64* @index
-    %ptr.398 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.398
-    %char.398 = load i8, i8* %ptr.398
-    call i8 @putchar(i8 %char.398)
+                %idx.118 = load i64, i64* @index
+                %idx.119 = sub i64 %idx.118, 2
+                store i64 %idx.119, i64* @index
+            
+                %idx.121 = load i64, i64* @index
+                %ptr.122 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.121
+                %char.120 = load i8, i8* %ptr.122
+                call i8 @putchar(i8 %char.120)
 
-                %idx.409 = load i64, i64* @index
-                %idx.410 = sub i64 %idx.409, 1
-                store i64 %idx.410, i64* @index
             
-                %idx.419 = load i64, i64* @index
-                %ptr.419 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.419
-                %byte.410 = load i8, i8* %ptr.419
-                %byte.411 = sub i8 %byte.410, 1
-                store i8 %byte.411, i8* %ptr.419
+                %idx.123 = load i64, i64* @index
+                %idx.124 = sub i64 %idx.123, 1
+                store i64 %idx.124, i64* @index
             
-    %idx.429 = load i64, i64* @index
-    %ptr.429 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.429
-    %char.429 = load i8, i8* %ptr.429
-    call i8 @putchar(i8 %char.429)
+                %idx.125 = load i64, i64* @index
+                %ptr.126 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.125
+                %byte.127 = load i8, i8* %ptr.126
+                %byte.128 = sub i8 %byte.127, 1
+                store i8 %byte.128, i8* %ptr.126
+            
+                %idx.130 = load i64, i64* @index
+                %ptr.131 = getelementptr [ 30000 x i8 ], [ 30000 x i8 ]* @array, i64 0, i64 %idx.130
+                %char.129 = load i8, i8* %ptr.131
+                call i8 @putchar(i8 %char.129)
 
+            
     ret i8 0
 }
