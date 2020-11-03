@@ -28,13 +28,38 @@ int main(void)
     
     //int a=54325;
     
-    char str[80];
+    //char str[80];
 
-    sprintf(str, "Value of Pi = %f", M_PI);
-    puts(str);
+    printf("Value of Pi = %f\n", M_PI);
+    //puts(str);
    
-    sprintf(str, "Value of EOF = %d", EOF);
-    puts(str);
+    printf("Value of EOF = %d\n", EOF);
+    //puts(str);
+
+    int pre_eof = 0;
+    int post_eof = 0;
+    int c = getchar();
+    while (c != EOF) {
+        pre_eof++;
+        c = getchar();
+    }
+    post_eof++;
+    if (EOF == getchar()) {
+        post_eof++;
+    }
+    if (EOF == getchar()) {
+        post_eof++;
+    }
+    if (EOF == getchar()) {
+        post_eof++;
+    }
+
+    printf("pre_eof %d, post_eof %d", pre_eof, post_eof);
+
+    // ugh, getchar *caches* EOF, this creates an infinite
+    // loop for LLVM IR compiled brainfuck programs that
+    // don't handle EOF characters: head.b, tic_tac_toe.b,
+    // and guess_number.b 
     
     return 0;
 }

@@ -22,70 +22,112 @@
 _start:
     mov r12, offset ARRAY
 
-    addb [r12], 1
-    
-    add r12, 10
-    
-    subb [r12], 1
-    
-    cmpb [r12], 0
-    je LOOP_END_20
-LOOP_START_3:
-    
-    mov rax, SYS_READ
-    mov rdi, STDIN
-    mov rsi, r12
-    mov rdx, 1
-    syscall
-    
-    addb [r12], 1
-    
-    cmpb [r12], 0
-    je LOOP_END_18
-LOOP_START_6:
-    
-    subb [r12], 1
-    
-    mov rax, SYS_WRITE
-    mov rdi, STDOUT
-    mov rsi, r12
-    mov rdx, 1
-    syscall
-    
-    subb [r12], 10
-    
-    cmpb [r12], 0
-    je LOOP_END_14
-LOOP_START_10:
-    
-    subb [r12], 1
-    
-    cmpb [r12], 0
-    jne LOOP_START_10
-LOOP_END_12:
-    
-    add r12, 1
-    
-    cmpb [r12], 0
-    jne LOOP_START_10
-LOOP_END_14:
-    
-    sub r12, 1
-    
-    subb [r12], 1
-    
-    add r12, 1
-    
-    cmpb [r12], 0
-    jne LOOP_START_6
-LOOP_END_18:
-    
-    sub r12, 1
-    
-    cmpb [r12], 0
-    jne LOOP_START_3
-LOOP_END_20:
-    
+                cmpb [r12], 0
+                je LOOP_END_4
+                LOOP_START_0:
+            
+                mov rax, SYS_WRITE
+                mov rdi, STDOUT
+                mov rsi, r12
+                mov rdx, 1
+                syscall
+            
+                subb [r12], 2
+            
+                mov rax, SYS_WRITE
+                mov rdi, STDOUT
+                mov rsi, r12
+                mov rdx, 1
+                syscall
+            
+                mov rax, SYS_WRITE
+                mov rdi, STDOUT
+                mov rsi, r12
+                mov rdx, 1
+                syscall
+            
+                cmpb [r12], 0
+                jne LOOP_START_0
+                LOOP_END_4:
+            
+                addb [r12], 1
+            
+                add r12, 10
+            
+                subb [r12], 1
+            
+                cmpb [r12], 0
+                je LOOP_END_25
+                LOOP_START_8:
+            
+                mov rax, SYS_READ
+                mov rdi, STDIN
+                mov rsi, r12
+                mov rdx, 1
+                syscall
+            
+                addb [r12], 1
+            
+                cmpb [r12], 0
+                je LOOP_END_23
+                LOOP_START_11:
+            
+                subb [r12], 1
+            
+                mov rax, SYS_WRITE
+                mov rdi, STDOUT
+                mov rsi, r12
+                mov rdx, 1
+                syscall
+            
+                subb [r12], 10
+            
+                cmpb [r12], 0
+                je LOOP_END_19
+                LOOP_START_15:
+            
+                subb [r12], 1
+            
+                cmpb [r12], 0
+                jne LOOP_START_15
+                LOOP_END_17:
+            
+                add r12, 1
+            
+                cmpb [r12], 0
+                jne LOOP_START_15
+                LOOP_END_19:
+            
+                sub r12, 1
+            
+                subb [r12], 1
+            
+                add r12, 1
+            
+                cmpb [r12], 0
+                jne LOOP_START_11
+                LOOP_END_23:
+            
+                sub r12, 1
+            
+                cmpb [r12], 0
+                jne LOOP_START_8
+                LOOP_END_25:
+            
+                cmpb [r12], 0
+                je LOOP_END_28
+                LOOP_START_26:
+            
+                mov rax, SYS_WRITE
+                mov rdi, STDOUT
+                mov rsi, r12
+                mov rdx, 1
+                syscall
+            
+                cmpb [r12], 0
+                jne LOOP_START_26
+                LOOP_END_28:
+            
     mov rax, SYS_EXIT
     mov rdi, SUCCESS
     syscall

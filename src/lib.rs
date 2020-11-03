@@ -198,6 +198,10 @@ pub fn parse(src: &str) -> Result<Vec<Inst>, Error> {
             },
             _ => (),
         }
+
+        // have to use this convoluted workaround since Rust
+        // doesn't allow mutating an item within a Vec while
+        // another item is borrowed
         if let Some(goto) = update_goto {
             instructions[i].update_goto(goto);
         }
