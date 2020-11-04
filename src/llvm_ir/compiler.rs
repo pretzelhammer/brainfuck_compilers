@@ -1,20 +1,17 @@
 use std::fs;
 use std::env;
 use std::io::Write;
-use std::ops::RangeFrom;
 
 use brainfuck_compilers::{ parse, Inst, EOF };
 
 const BOILERPLATE: &str = include_str!("boilerplate.ll");
 
-struct Counter(RangeFrom<usize>);
+struct Counter(usize);
 
 impl Counter {
-    fn new() -> Self {
-        Counter(0..)
-    }
     fn next(&mut self) -> usize {
-        self.0.next().unwrap()
+        self.0 += 1;
+        self.0
     }
 }
 
@@ -144,7 +141,7 @@ fn inst_to_asm(idx: usize, inst: &Inst, ssa: &mut Counter) -> String {
 
 fn write_inst_to_asm<W: Write>(instructions: &[Inst], output: &mut W) -> Result<(), Box<dyn std::error::Error>> {
     // we have to do this because LLVM requires IR to be in SSA form
-    let mut ssa = Counter::new();
+    let mut ssa = Counter(0);
     for (idx, inst) in instructions.iter().enumerate() {
         output.write(inst_to_asm(idx, inst, &mut ssa).as_bytes())?;
     }
