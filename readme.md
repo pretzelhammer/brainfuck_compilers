@@ -2,6 +2,12 @@
 
 This is the companion code repository for the article [Learn Assembly with Entirely Too Many Brainfuck Compilers](https://github.com/pretzelhammer/rust-blog/blob/master/posts/too-many-brainfuck-compilers.md). The code is 100% safe Rust and dependency-free.
 
+Quick links:
+- [interpreter source](./src/interpreter.rs)
+- [x86 compiler source](./src/x86_64/compiler.rs)
+- [ARM compiler source](./src/aarch64/compiler.rs)
+- [WebAssembly compiler source](./src/wasm32_wasi/compiler.rs)
+- [LLVM compiler source](./src/llvm_ir/compiler.rs)
 
 
 ## Initial Setup
