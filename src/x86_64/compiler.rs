@@ -2,84 +2,85 @@ use std::fs;
 use std::env;
 use std::io::Write;
 
-use brainfuck_compilers::{ parse, Inst };
+use brainfuck_compilers::{parse, Inst, InstKind};
 
 const BOILERPLATE: &str = include_str!("boilerplate.s");
 
-fn inst_to_asm(idx: usize, inst: &Inst) -> String {
-    match inst {
-        Inst::IncPtr(n) => {
+fn inst_to_asm(inst: &Inst) -> String {
+    let Inst {idx, kind, times} = inst;
+    match kind {
+        InstKind::IncPtr => {
             format!("
                 add r12, {}
-            ", n)
+            ", times)
         },
-        Inst::DecPtr(n) => {
+        InstKind::DecPtr => {
             format!("
                 sub r12, {}
-            ", n)
+            ", times)
         },
-        Inst::IncByte(n) => {
+        InstKind::IncByte => {
             format!("
                 addb [r12], {}
-            ", n)
+            ", times)
         },
-        Inst::DecByte(n) => {
+        InstKind::DecByte => {
             format!("
                 subb [r12], {}
-            ", n)
+            ", times)
         },
-        Inst::ReadByte(n) => {
+        InstKind::ReadByte => {
             "
                 mov rax, SYS_READ
                 mov rdi, STDIN
                 mov rsi, r12
                 mov rdx, 1
                 syscall
-            ".repeat(*n)
+            ".repeat(*times)
         },
-        Inst::WriteByte(n) => {
+        InstKind::WriteByte => {
             "
                 mov rax, SYS_WRITE
                 mov rdi, STDOUT
                 mov rsi, r12
                 mov rdx, 1
                 syscall
-            ".repeat(*n)
+            ".repeat(*times)
         },
-        Inst::LoopStart(_, goto) => {
+        InstKind::LoopStart { end_idx } => {
             format!("
                 cmpb [r12], 0
                 je LOOP_END_{}
                 LOOP_START_{}:
-            ", goto - 1, idx)
+            ", end_idx - 1, idx)
         },
-        Inst::LoopEnd(_, goto) => {
+        InstKind::LoopEnd { start_idx } => {
             format!("
                 cmpb [r12], 0
                 jne LOOP_START_{}
                 LOOP_END_{}:
-            ", goto - 1, idx)
+            ", start_idx - 1, idx)
         },
     }
 }
 
-fn write_inst_to_asm<W: Write>(instructions: &[Inst], output: &mut W) -> Result<(), Box<dyn std::error::Error>> {
-    for (idx, inst) in instructions.iter().enumerate() {
-        output.write(inst_to_asm(idx, inst).as_bytes())?;
+fn write_inst_to_asm<W: Write>(insts: &[Inst], output: &mut W) -> Result<(), Box<dyn std::error::Error>> {
+    for inst in insts.iter() {
+        output.write(inst_to_asm(inst).as_bytes())?;
     }
     
     Ok(())
 }
 
 fn parse_and_compile<W: Write>(src: &str, mut output: &mut W) -> Result<(), Box<dyn std::error::Error>> {
-    let instructions = parse(src)?;
+    let insts = parse(src)?;
     
     let mut split_bp = BOILERPLATE.split("{{REPLACE}}");
     let header_bp = split_bp.next().unwrap();
     let footer_bp = split_bp.next().unwrap();
     
     output.write(header_bp.as_bytes())?;
-    write_inst_to_asm(&instructions, &mut output)?;
+    write_inst_to_asm(&insts, &mut output)?;
     output.write(footer_bp.as_bytes())?;
     
     Ok(())
