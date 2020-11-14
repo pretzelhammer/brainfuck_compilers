@@ -1,40 +1,41 @@
-use brainfuck_compilers::{ parse, ARRAY_LEN, EOF, Error, Inst};
+use brainfuck_compilers::{parse, ARRAY_LEN, EOF, Error, Inst, InstKind};
 
 use std::env;
 use std::io;
 use std::io::{Read, Write, Bytes};
 
-fn run<R: Read, W: Write>(instructions: &[Inst], mut input: Bytes<R>, output: &mut W) -> Result<(), Error> {
+fn run<R: Read, W: Write>(insts: &[Inst], mut input: Bytes<R>, output: &mut W) -> Result<(), Error> {
     let mut memory = [0_u8; ARRAY_LEN];
     let mut ptr = 0;
     let mut inst_ptr = 0;
 
-    while inst_ptr < instructions.len() {
-        match instructions[inst_ptr] {
-            Inst::IncPtr(n) => {
-                if ptr + n >= ARRAY_LEN {
+    while inst_ptr < insts.len() {
+        let Inst {kind, times, ..} = &insts[inst_ptr];
+        match kind {
+            InstKind::IncPtr => {
+                ptr += times;
+                if ptr >= ARRAY_LEN {
                     return Err(Error::PtrAboveLimit);
                 }
-                ptr += n;
                 inst_ptr += 1;
             },
-            Inst::DecPtr(n) => {
-                if n > ptr {
+            InstKind::DecPtr => {
+                if *times > ptr {
                     return Err(Error::PtrBelowZero);
                 }
-                ptr -= n;
+                ptr -= times;
                 inst_ptr += 1;
             },
-            Inst::IncByte(n) => {
-                memory[ptr] = memory[ptr].wrapping_add(n as u8);
+            InstKind::IncByte => {
+                memory[ptr] = memory[ptr].wrapping_add(*times as u8);
                 inst_ptr += 1;
             },
-            Inst::DecByte(n) => {
-                memory[ptr] = memory[ptr].wrapping_sub(n as u8);
+            InstKind::DecByte => {
+                memory[ptr] = memory[ptr].wrapping_sub(*times as u8);
                 inst_ptr += 1;
             },
-            Inst::WriteByte(n) => {
-                for _ in 0..n {
+            InstKind::WriteByte => {
+                for _ in 0..*times {
                     let result = output.write(&[memory[ptr]]);
                     match result {
                         Ok(bytes_written) if bytes_written < 1 => {
@@ -48,13 +49,13 @@ fn run<R: Read, W: Write>(instructions: &[Inst], mut input: Bytes<R>, output: &m
                 }
                 inst_ptr += 1;
             },
-            Inst::ReadByte(n) => {
+            InstKind::ReadByte => {
                 // before asking user for some input we have to make
                 // sure they've seen our prompt / output
                 if let Err(error) = output.flush() {
                     panic!("error while flushing to output: {}", error);
                 }
-                for _ in 0..n {
+                for _ in 0..*times {
                     let maybe_byte = input.next();
                     match maybe_byte {
                         Some(Ok(byte)) => {
@@ -70,16 +71,16 @@ fn run<R: Read, W: Write>(instructions: &[Inst], mut input: Bytes<R>, output: &m
                 }
                 inst_ptr += 1;
             },
-            Inst::LoopStart(_, goto) => {
+            InstKind::LoopStart { end_idx } => {
                 if memory[ptr] == 0 {
-                    inst_ptr = goto;
+                    inst_ptr = *end_idx;
                 } else {
                     inst_ptr += 1;
                 }
             },
-            Inst::LoopEnd(_, goto) => {
+            InstKind::LoopEnd { start_idx } => {
                 if memory[ptr] != 0 {
-                    inst_ptr = goto;
+                    inst_ptr = *start_idx;
                 } else {
                     inst_ptr += 1;
                 }
@@ -91,8 +92,8 @@ fn run<R: Read, W: Write>(instructions: &[Inst], mut input: Bytes<R>, output: &m
 }
 
 fn parse_and_run<R: Read, W: Write>(src: &str, input: Bytes<R>, output: &mut W) -> Result<(), Error> {
-    let instructions = parse(src)?;
-    run(&instructions, input, output)
+    let insts = parse(src)?;
+    run(&insts, input, output)
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

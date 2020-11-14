@@ -2,29 +2,30 @@ use std::fs;
 use std::env;
 use std::io::Write;
 
-use brainfuck_compilers::{ parse, Inst };
+use brainfuck_compilers::{parse, Inst, InstKind};
 
 const BOILERPLATE: &str = include_str!("boilerplate.wat");
 
 fn inst_to_asm(inst: &Inst, terminate_loops: usize) -> String {
-    match inst {
-        Inst::IncPtr(n) => {
+    let Inst {kind, times, ..} = inst;
+    match kind {
+        InstKind::IncPtr => {
             format!("
                 local.get $ptr
                 i32.const {}
                 i32.add
                 local.set $ptr
-            ", n)
+            ", times)
         },
-        Inst::DecPtr(n) => {
+        InstKind::DecPtr => {
             format!("
                 local.get $ptr
                 i32.const {}
                 i32.sub
                 local.set $ptr
-            ", n)
+            ", times)
         },
-        Inst::IncByte(n) => {
+        InstKind::IncByte => {
             format!("
                 local.get $ptr
                 local.get $ptr
@@ -32,9 +33,9 @@ fn inst_to_asm(inst: &Inst, terminate_loops: usize) -> String {
                 i32.const {}
                 i32.add
                 i32.store8
-            ", n)
+            ", times)
         },
-        Inst::DecByte(n) => {
+        InstKind::DecByte => {
             format!("
                 local.get $ptr
                 local.get $ptr
@@ -42,9 +43,9 @@ fn inst_to_asm(inst: &Inst, terminate_loops: usize) -> String {
                 i32.const {}
                 i32.sub
                 i32.store8
-            ", n)
+            ", times)
         },
-        Inst::ReadByte(n) => {
+        InstKind::ReadByte => {
             format!("
                 i32.const 30004
                 local.get $ptr
@@ -57,9 +58,9 @@ fn inst_to_asm(inst: &Inst, terminate_loops: usize) -> String {
                 i32.const 30012
                 call $fd_read
                 drop
-            ".repeat(*n))
+            ".repeat(*times))
         },
-        Inst::WriteByte(n) => {
+        InstKind::WriteByte => {
             format!("
                 i32.const 30004
                 local.get $ptr
@@ -72,9 +73,9 @@ fn inst_to_asm(inst: &Inst, terminate_loops: usize) -> String {
                 i32.const 30012
                 call $fd_write
                 drop
-            ".repeat(*n))
+            ".repeat(*times))
         },
-        Inst::LoopStart(_, _) => {
+        InstKind::LoopStart { .. } => {
             "
                 block
                 local.get $ptr
@@ -84,7 +85,7 @@ fn inst_to_asm(inst: &Inst, terminate_loops: usize) -> String {
                 loop
             ".to_string()
         },
-        Inst::LoopEnd(_, _) => {
+        InstKind::LoopEnd { .. } => {
             format!("
                 local.get $ptr
                 i32.load8_u
@@ -98,52 +99,54 @@ fn inst_to_asm(inst: &Inst, terminate_loops: usize) -> String {
     }
 }
 
-fn write_inst_to_asm<W: Write>(instructions: &[Inst], output: &mut W) -> Result<(), Box<dyn std::error::Error>> {
-    for (idx, inst) in instructions.iter().enumerate() {
+fn write_inst_to_asm<W: Write>(insts: &[Inst], output: &mut W) -> Result<(), Box<dyn std::error::Error>> {
+    for inst in insts.iter() {
+        let Inst {idx, kind, times} = inst;
         // because WASM doesn't support GOTO control flow we have
         // to calculate how deeply nested the current LoopEnd is and
         // how many LoopStarts it terminates (as "block" and "loop"
         // instructions must be terminated with "end" instructions)
-        let terminate_loops = {
-            let mut starts = 0;
-            match inst {
-                Inst::LoopEnd(n, _) => {
-                    let mut mut_n = *n;
-                    let mut mut_p = 0;
-                    for i in (0..idx).rev() {
-                        match instructions[i] {
-                            Inst::LoopStart(m, _) => {
-                                let mut mut_m = m;
-                                if mut_m > mut_p {
-                                    mut_m -= mut_p;
-                                    mut_p = 0;
+        let mut terminate_loops = 0;
+        match kind {
+            InstKind::LoopEnd { .. } => {
+                let mut loop_ends = *times;
+                let mut nested_loop_ends = 0;
+                for i in (0..*idx).rev() {
+                    let Inst {kind, times, ..} = &insts[i];
+                    match kind {
+                        InstKind::LoopStart { .. } => {
+                            let mut loop_starts = *times;
+                            if loop_starts > nested_loop_ends {
+                                loop_starts -= nested_loop_ends;
+                                nested_loop_ends = 0;
+                            }
+                            if nested_loop_ends > 0 {
+                                // loop_starts <= nested_loop_ends is true
+                                nested_loop_ends -= loop_starts;
+                            } else {
+                                // this LoopEnd doesn't terminate any LoopStarts
+                                if loop_starts > loop_ends {
+                                    terminate_loops = 0;
+                                    break;
                                 }
-                                if mut_p > 0 {
-                                    mut_p -= mut_m;
-                                } else {
-                                    starts += 1;
-                                    if mut_m > mut_n {
-                                        starts = 0;
-                                        break;
-                                    }
-                                    if mut_m == mut_n {
-                                        break;
-                                    }
-                                    mut_n -= mut_m;
+                                // this LoopEnd terminates +1 LoopStarts
+                                terminate_loops += 1;
+                                if loop_starts == loop_ends {
+                                    break;
                                 }
-                            },
-                            Inst::LoopEnd(o, _) => {
-                                mut_p += o;
-                            },
-                            _ => (),
-                        }
+                                loop_ends -= loop_starts;
+                            }
+                        },
+                        InstKind::LoopEnd { .. } => {
+                            let loop_ends = *times;
+                            nested_loop_ends += loop_ends;
+                        },
+                        _ => (),
                     }
                 }
-                _ => (),
-            }
-            starts
-        };
-
+            },
+            _ => (),
+        }
         output.write(inst_to_asm(inst, terminate_loops).as_bytes())?;
     }
     
@@ -151,14 +154,14 @@ fn write_inst_to_asm<W: Write>(instructions: &[Inst], output: &mut W) -> Result<
 }
 
 fn parse_and_compile<W: Write>(src: &str, mut output: &mut W) -> Result<(), Box<dyn std::error::Error>> {
-    let instructions = parse(src)?;
+    let insts = parse(src)?;
     
     let mut split_bp = BOILERPLATE.split("{{REPLACE}}");
     let header_bp = split_bp.next().unwrap();
     let footer_bp = split_bp.next().unwrap();
     
     output.write(header_bp.as_bytes())?;
-    write_inst_to_asm(&instructions, &mut output)?;
+    write_inst_to_asm(&insts, &mut output)?;
     output.write(footer_bp.as_bytes())?;
     
     Ok(())
