@@ -15,7 +15,7 @@
 
 .lcomm ARRAY, 30000
 
-.p2align 12
+.balign 4096
 
 .text
 
