@@ -4,8 +4,8 @@ build-env:
     docker build -f Dockerfile -t brainfuck-compilers-env .
 
 
-# commands to run code
 
+# commands to run code
 
 interpret name:
     cargo run --release --bin bf_interpreter -- input/{{name}}.b
@@ -22,8 +22,8 @@ alias carbw := compile-and-run-bf-to-wasm32-wasi
 alias carbl := compile-and-run-bf-to-llvm-ir
 
 
-# commands to compile code & run benchmarks
 
+# commands to compile code & run benchmarks
 
 alias cbat := compile-bf-to-all-targets
 
@@ -40,14 +40,14 @@ benchmark name:
     docker run -v $(pwd):/root/project -w /root/project/output brainfuck-compilers-env bash -c "time ./x86_64/{{name}}.out; time ./aarch64/{{name}}.out; time PATH=/root/.wasmtime/bin wasmtime ./wasm32_wasi/{{name}}.wasm; time ./llvm_ir/{{name}}.out"
 
 
-# commands to compile & run examples
 
+# commands to compile & run examples
 
 compile-and-run-x86_64-example name:
     docker run -it -v $(pwd):/root/project -w /root/project/examples/x86_64 brainfuck-compilers-env bash -c "clang -nostdlib -fno-integrated-as -Wa,-msyntax=intel,-mnaked-reg -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
 compile-and-run-aarch64-example name:
-    docker run -it -v $(pwd):/root/project -w /root/project/examples/aarch64 brainfuck-compilers-env bash -c "clang -nostdlib -fno-integrated-as -target aarch64-linux-gnu -s {{name}}.s -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
+    docker run -it -v $(pwd):/root/project -w /root/project/examples/aarch64 brainfuck-compilers-env bash -c "clang -nostdlib -fno-integrated-as -target aarch64-linux-gnu -s {{name}}.s -o {{name}}.out && qemu-aarch64 ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
 compile-and-run-wasm32-wasi-example name:
     docker run -it -v $(pwd):/root/project -w /root/project/examples/wasm32_wasi brainfuck-compilers-env bash -c "wat2wasm {{name}}.wat -o {{name}}.wasm; PATH=/root/.wasmtime/bin wasmtime {{name}}.wasm; echo -e \"\nExit code: \$?\""
@@ -59,8 +59,8 @@ compile-and-run-c-example name:
     docker run -it -v $(pwd):/root/project -w /root/project/examples/c brainfuck-compilers-env bash -c "clang {{name}}.c -o {{name}}.out && ./{{name}}.out; echo -e \"\nExit code: \$?\""
 
 
-# commands to compile & run bf programs
 
+# commands to compile & run bf programs
 
 compile-and-run-bf-to-x86_64 name:
     cargo run --release --bin bf_to_x86_64_compiler -- ./input/{{name}}.b ./output/x86_64/{{name}}.s
@@ -68,7 +68,7 @@ compile-and-run-bf-to-x86_64 name:
 
 compile-and-run-bf-to-aarch64 name:
     cargo run --release --bin bf_to_aarch64_compiler -- ./input/{{name}}.b ./output/aarch64/{{name}}.s
-    docker run -it -v $(pwd):/root/project -w /root/project/output/aarch64 brainfuck-compilers-env bash -c "clang -nostdlib -fno-integrated-as -target aarch64-linux-gnu -s {{name}}.s -o {{name}}.out && ./{{name}}.out"
+    docker run -it -v $(pwd):/root/project -w /root/project/output/aarch64 brainfuck-compilers-env bash -c "clang -nostdlib -fno-integrated-as -target aarch64-linux-gnu -s {{name}}.s -o {{name}}.out && qemu-aarch64 ./{{name}}.out"
 
 compile-and-run-bf-to-wasm32-wasi name:
     cargo run --release --bin bf_to_wasm32_wasi_compiler -- ./input/{{name}}.b ./output/wasm32_wasi/{{name}}.wat
@@ -79,8 +79,8 @@ compile-and-run-bf-to-llvm-ir name:
     docker run -it -v $(pwd):/root/project -w /root/project/output/llvm_ir brainfuck-compilers-env bash -c "clang -O3 -Wno-override-module {{name}}.ll -o {{name}}.out && ./{{name}}.out"
 
 
-# commands to build binaries
 
+# commands to build binaries
 
 build-interpreter:
     cargo build --release --bin bf_interpreter
@@ -98,8 +98,8 @@ build-llvm-ir-compiler:
     cargo build --release --bin bf_to_llvm_ir_compiler
 
 
-# misc
 
+# misc
 
 test:
     cargo test

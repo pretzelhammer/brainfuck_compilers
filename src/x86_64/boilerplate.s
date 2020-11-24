@@ -1,4 +1,4 @@
-# GNU Assembly, Intel syntax, x86_64 Linux
+# GNU Assembler, Intel syntax, x86_64 Linux
 
 .data
 

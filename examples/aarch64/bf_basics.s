@@ -15,6 +15,7 @@
 
 .lcomm ARRAY, 30000
 
+// needed because of QEMU bug
 .p2align 12 // equivalent to .balign 4096
 
 .text

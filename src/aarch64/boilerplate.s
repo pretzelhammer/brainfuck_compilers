@@ -1,4 +1,4 @@
-// GNU Assembly, ARM syntax, aarch64 Linux
+// GNU Assembler, ARM syntax, aarch64 Linux
 
 .data
 
@@ -15,7 +15,7 @@
 
 .lcomm ARRAY, 30000
 
-.balign 4096
+.balign 4096 // fix for QEMU bug
 
 .text
 
