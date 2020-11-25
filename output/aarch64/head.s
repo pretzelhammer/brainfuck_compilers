@@ -15,7 +15,9 @@
 
 .lcomm ARRAY, 30000
 
-.balign 4096 // fix for QEMU bug
+// workaround for QEMU bug in emulating aarch64 programs
+// would not be necessary on a native aarch64 machine
+.balign 4096
 
 .text
 
